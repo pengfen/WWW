@@ -4,7 +4,7 @@ return [
     'components' => [
 	    'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=192.168.179.129;dbname=resource-dev',
+            'dsn' => 'mysql:host=192.168.179.129;dbname=resource',
             'username' => 'caopeng',
             'password' => '1234560.',
             'charset' => 'utf8',
