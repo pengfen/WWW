@@ -37,5 +37,18 @@ vim struct.php;
 
 [1] Production 生产环境
 
+开发环境初始化
+cmd
+d:
+D:>cd D:\files\phpStudy\php56n #需要目录 php.ini 去掉注释 extension=php_openssl.dll
+D:\files\phpStudy\php56n>D:\WWW\init.bat
+
+[0] Development
+
+注意权限
+chmod 0777 backend/web/assets
+chmod 0777 frontend/web/assets
+chmod 0755 yii
+
 ------------------------------------------------------
 修改忽略文件(上传到github时忽略)
