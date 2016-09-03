@@ -16,7 +16,8 @@ nbproject
 Thumbs.db
 
 # composer vendor dir
-/vendor
+/frontend/runtime
+/backend/runtime
 
 # composer itself is not needed
 composer.phar
