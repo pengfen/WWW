@@ -1,0 +1,20 @@
+peng2 192.168.179.128 --- peng3 192.168.179.129
+peng2 上安装好 php nginx
+
+peng3 安装 mysql 
+centos 6.3 安装mysql yum -y install mysqld
+centos 6.5 安装mysql yum -y install mysql mysql-server
+service mysqld start
+mysql -uroot -p
+
+下载 yii2 框架 --- 解压
+在peng3创建开发库
+给本地主机分配数据库访问权限
+mysql -uroot -p
+grant all on *.* to caopeng@'%' identified by '1234560.';
+flush privileges;
+
+修改项目配置文件
+页面访问
+
+上传代码到github上
