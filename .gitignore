@@ -47,4 +47,4 @@ phpunit.phar
 /backend/config/main-local.php
 /backend/config/params-local.php
 /console/config
-/common
+/common/config/params-local.php
