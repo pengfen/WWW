@@ -5,13 +5,12 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
 use backend\models\Auth;
 
 /**
  * Site controller
  */
-class SiteController extends Controller
+class TechnarticlecateController extends Controller
 {
     //public $layout = false;
 	/**
@@ -62,6 +61,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+		echo 'kkkk';
+		exit;
 		// 获取权限管理的相关菜单
 		// $res = Auth::find()->where(['level'=>1])->asArray()->all(); // 获取所有数据
 		$auth = Auth::find()->select('name, controller, action')->where(['pid'=>1])->asArray()->all(); // 查询需要的字段
@@ -72,39 +73,5 @@ class SiteController extends Controller
 			'source' => $source
 		]);
     }
-
-    /**
-     * Login action.
-     *
-     * @return string
-     */
-    public function actionLogin()
-    {
-        /*if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }*/
-		
-		return $this->render('login');
-    }
-
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
+	
 }

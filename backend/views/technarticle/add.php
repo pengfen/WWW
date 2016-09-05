@@ -26,7 +26,7 @@
 </style>
 
 <div class="info">
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="/backend/web/technarticle/insert" method="post" enctype="multipart/form-data">
 	    <ul>
 		    <li class="">
 			    <span class="label">标题</span>
@@ -44,7 +44,7 @@
 			</li>
 			<li class="">
 			    <span class="label">上传图片</span>
-				<input type="file" class="info_title" name="title" vlaue="" placeholder=请输入标题 >
+				<input type="file" class="info_title" name="img" placeholder="请上传权限关联图">
 			</li>
 			<li class="">
 			    <span class="label"></span>

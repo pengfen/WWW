@@ -14,18 +14,28 @@
 </style>
 <div class="menu_info">
     <h2>权限管理</h2>
-	<span>权限列表</span><span>权限列表</span>
+    <?php
+	foreach ($auth as $val) {
+		$request = Yii::$app->request->getBaseUrl();
+		echo "<span><a href='".$request."/".$val['controller']."/".$val['action']."'>".$val['name']."</a></span>";
+	}
+	?>
+	<img src="../images/bg.png"/>
+</div>
+
+<div class="menu_info">
+    <h2>资料管理</h2>
+    <?php
+	foreach ($source as $val) {
+		$request = Yii::$app->request->getBaseUrl();
+		echo "<span><a href='".$request."/".strtolower($val['controller'])."/".$val['action']."'>".$val['name']."</a></span>";
+	}
+	?>
 	<img src="../images/bg.png"/>
 </div>
 
 <div class="menu_info">
     <h2>统计报表</h2>
-	<span>权限列表</span><span>权限列表</span>
-	<img src="../images/bg.png"/>
-</div>
-
-<div class="menu_info">
-    <h2>会员管理</h2>
 	<span>权限列表</span><span>权限列表</span>
 	<img src="../images/bg.png"/>
 </div>

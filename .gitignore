@@ -36,15 +36,17 @@ phpunit.phar
 /.vagrant
 
 #index.php
-#/frontend/config/main-local.php
-#/frontend/config/params-local.php
+/frontend/config/main-local.php
+/frontend/config/params-local.php
 /frontend/web/index.php
 /frontend/web/index-test.php
 /frontend/web/.htaccess
 /backend/web/index.php
 /backend/web/index-test.php
 /backend/web/.htaccess
-#/backend/config/main-local.php
-#/backend/config/params-local.php
+/backend/config/main-local.php
+/backend/config/params-local.php
 /console/config
-#/common/config/params-local.php
+/common/config/params-local.php
+/common/config/main-local.php
+/common/config/main.php

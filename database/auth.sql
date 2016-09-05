@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `resource_manager` (
   `email` varchar(30) DEFAULT NULL COMMENT '邮箱',
   `rid` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '角色id',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='管理员表';
 
 INSERT INTO `resource_manager` (`id`, `username`, `password`, `regtime`, `logtime`, `email`, `rid`) VALUES
 (1, 'admin', password(123456), unix_timestamp(), 0, 'caopeng8787@163.com', 0),
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `resource_role` (
   `updatetime` int unsigned DEFAULT 0 COMMENT '修改时间',
   `uid` int unsigned DEFAULT 0 COMMENT '修改人',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台角色表';
 
 ALTER TABLE `resource_role`
 ADD COLUMN `addtime` int unsigned DEFAULT 0 COMMENT '添加时间' AFTER `aac`;
@@ -48,12 +48,13 @@ CREATE TABLE IF NOT EXISTS `resource_auth` (
   `path` varchar(32) NOT NULL DEFAULT '' COMMENT '全路径',
   `level` tinyint(4) NOT NULL DEFAULT '0' COMMENT '权限级别',
   `image` varchar(255) NOT NULL DEFAULT '' COMMENT '权限关联图',
+  `isShow` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否显示 0 显示 1 不显示',
   `addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
   `mid` int unsigned DEFAULT 0 COMMENT '创建者',
   `updatetime` int unsigned DEFAULT 0 COMMENT '修改时间',
   `uid` int unsigned DEFAULT 0 COMMENT '修改人',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台权限表';
 
 INSERT INTO `data_auth` (`id`, `name`, `pid`, `controller`, `action`, `path`, `level`, `image`) VALUES
 (1, '权限管理', 0, '', '', '1', 0, ''),
@@ -67,3 +68,5 @@ ALTER TABLE `resource_auth`
 ADD COLUMN `updatetime` int unsigned DEFAULT 0 COMMENT '修改时间';
 ALTER TABLE `resource_auth`
 ADD COLUMN `uid` int unsigned DEFAULT 0 COMMENT '修改人';
+ALTER TABLE `resource_auth`
+ADD COLUMN `isShow` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否显示 0 显示 1 不显示',
