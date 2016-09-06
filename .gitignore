@@ -29,6 +29,8 @@ Thumbs.db
 /common/config/params-local.php
 /console/config/main-local.php
 /console/config/params-local.php
+/backend/runtime
+/frontend/runtime
 
 # composer itself is not needed
 composer.phar
