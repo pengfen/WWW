@@ -17,9 +17,18 @@ Thumbs.db
 
 # composer vendor dir
 /vendor
-/frontend/runtime
-/backend/runtime
-/project
+/frontend/web/index.php
+/frontend/web/index-test.php
+/frontend/config/main-local.php
+/frontend/config/params-local.php
+/backend/web/index.php
+/backend/web/index-test.php
+/backend/config/main-local.php
+/backend/config/params-local.php
+/common/config/main-local.php
+/common/config/params-local.php
+/console/config/main-local.php
+/console/config/params-local.php
 
 # composer itself is not needed
 composer.phar
@@ -34,19 +43,3 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
-
-#index.php
-/frontend/config/main-local.php
-/frontend/config/params-local.php
-/frontend/web/index.php
-/frontend/web/index-test.php
-/frontend/web/.htaccess
-/backend/web/index.php
-/backend/web/index-test.php
-/backend/web/.htaccess
-/backend/config/main-local.php
-/backend/config/params-local.php
-/console/config
-/common/config/params-local.php
-/common/config/main-local.php
-/common/config/main.php

@@ -1,6 +1,14 @@
 <?php
 
-use frontend\assets\AppAsset;
+/* @var $this \yii\web\View */
+/* @var $content string */
+
+use backend\assets\AppAsset;
+use yii\helpers\Html;
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\widgets\Breadcrumbs;
+use common\widgets\Alert;
 
 AppAsset::register($this);
 ?>
@@ -8,99 +16,60 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-    <meta charset="utf8">
+    <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>后台管理</title>
-	<style>
-		body,ul,li,p,h1,h2,h3,h4 {
-		    padding: 0; margin: 0;
-		}
-		body {
-		    font-size: 12px;
-		}
-		ul,li {
-		    list-style: none;
-		}
-		a {
-		    text-decoration: none;
-		}
-		img,input {
-		    border: none; outline: none;
-		}
-		.fl {
-		    float: left;
-		}
-		.fr {
-		    float: right;
-		}
-		.clear {
-		    clear: both;
-		}
-		.w {
-		    margin: 0 auto; width: 1200px;
-		}
-		.mt10 {
-		    margin-top: 10px;
-		}
-		.mt20 {
-		    margin-top: 20px;
-		}
-		.header {
-		    height: 60px; line-height: 60px; background: #14191c;
-		}
-		.header .logo {
-		    width: 140px; height: 60px;
-		}
-		.header .nav-left li {
-		    width: 80px; float: left;
-		}
-		.header .nav-left li a {
-		    color: #787d82; font-size: 14px;
-		}
-		.header .nav-left li a:hover {
-		    color: #fff; font-weight: bold;
-		}
-		.header .nav-right li {
-		    width: 80px; float: left; text-align: center;
-		}
-		.header .nav-right li a {
-		    color: #787d82; font-size: 14px;
-		}
-		.header .nav-right li a:hover {
-		    color: #fff; font-weight: bold;
-		}
-		.wrap {
-			width: 1900px; margin: 0px auto;
-		}
-	</style>
+    <?= Html::csrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
+    <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
-<div class="header">
-	<div class="w">
-		<ul class="fl nav-left">
-			<li><a href="">首页</a></li>
-		</ul>
-		<ul class="fr nav-right">
-			<li><a href="">个人中心</a></li>
-			<li><a href="">登录</a></li>
-			<li><a href="">退出</a></li>
-		</ul>
-	</div>
-</div>
-<div class="clear"></div>
 
 <div class="wrap">
+    <?php
+    NavBar::begin([
+        'brandLabel' => 'My Company',
+        'brandUrl' => Yii::$app->homeUrl,
+        'options' => [
+            'class' => 'navbar-inverse navbar-fixed-top',
+        ],
+    ]);
+    $menuItems = [
+        ['label' => 'Home', 'url' => ['/site/index']],
+    ];
+    if (Yii::$app->user->isGuest) {
+        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+    } else {
+        $menuItems[] = '<li>'
+            . Html::beginForm(['/site/logout'], 'post')
+            . Html::submitButton(
+                'Logout (' . Yii::$app->user->identity->username . ')',
+                ['class' => 'btn btn-link']
+            )
+            . Html::endForm()
+            . '</li>';
+    }
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => $menuItems,
+    ]);
+    NavBar::end();
+    ?>
+
     <div class="container">
+        <?= Breadcrumbs::widget([
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]) ?>
+        <?= Alert::widget() ?>
         <?= $content ?>
     </div>
 </div>
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left"></p>
+        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
-        <p class="pull-right"></p>
+        <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
 

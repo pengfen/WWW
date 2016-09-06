@@ -1,78 +1,53 @@
-<style>
-    .menu_info {
-		width: 455px; height: 390px; background: #F2F2F2; margin: 10px; float: left;
-	}
-	h2 {
-		margin-left: 10px; height: 40px; line-height: 40px;
-	}
-	span {
-		margin-left: 10px; height: 30px; line-height: 30px;
-	}
-	img {
-		width: 100%; height: auto;
-	}
-</style>
-<div class="menu_info">
-    <h2>权限管理</h2>
-    <?php
-	foreach ($auth as $val) {
-		$request = Yii::$app->request->getBaseUrl();
-		echo "<span><a href='".$request."/".$val['controller']."/".$val['action']."'>".$val['name']."</a></span>";
-	}
-	?>
-	<img src="../images/bg.png"/>
-</div>
+<?php
 
-<div class="menu_info">
-    <h2>资料管理</h2>
-    <?php
-	foreach ($source as $val) {
-		$request = Yii::$app->request->getBaseUrl();
-		echo "<span><a href='".$request."/".strtolower($val['controller'])."/".$val['action']."'>".$val['name']."</a></span>";
-	}
-	?>
-	<img src="../images/bg.png"/>
-</div>
+/* @var $this yii\web\View */
 
-<div class="menu_info">
-    <h2>统计报表</h2>
-	<span>权限列表</span><span>权限列表</span>
-	<img src="../images/bg.png"/>
-</div>
+$this->title = 'My Yii Application';
+?>
+<div class="site-index">
 
-<div class="menu_info">
-    目录管理
-	<h2>会员管理</h2>
-	<span>权限列表</span><span>权限列表</span>
-	<img src="../images/bg.png"/>
-</div>
+    <div class="jumbotron">
+        <h1>Congratulations!</h1>
 
-<div class="menu_info">
-    页面管理
-	<h2>会员管理</h2>
-	<span>权限列表</span><span>权限列表</span>
-	<img src="../images/bg.png"/>
-</div>
+        <p class="lead">You have successfully created your Yii-powered application.</p>
 
-<div class="menu_info">
-    课程管理
-	<h2>会员管理</h2>
-	<span>权限列表</span><span>权限列表</span>
-	<img src="../images/bg.png"/>
-</div>
+        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+    </div>
 
-<div class="menu_info">
-    <h2>权限管理</h2>
-	<span>权限列表</span><span>权限列表</span>
-	<img src="../images/bg.png"/>
-</div>
+    <div class="body-content">
 
-<div class="menu_info">
-    其它管理
-    分类管理
-	实现及bug管理
-	回收站管理
-	<h2>会员管理</h2>
-	<span>权限列表</span><span>权限列表</span>
-	<img src="../images/bg.png"/>
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>Heading</h2>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur.</p>
+
+                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Heading</h2>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur.</p>
+
+                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Heading</h2>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur.</p>
+
+                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+            </div>
+        </div>
+
+    </div>
 </div>
