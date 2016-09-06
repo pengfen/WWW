@@ -1,0 +1,54 @@
+peng2 192.168.179.128 --- peng3 192.168.179.129
+peng2 上安装好 php nginx
+
+peng3 安装 mysql (参考data/mysql/mysql-install.html)
+centos 6.3 安装mysql yum -y install mysqld
+centos 6.5 安装mysql yum -y install mysql mysql-server
+service mysqld start (Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2) 注意服务没启动)
+mysql -uroot -p
+
+下载 yii2 框架 --- 解压
+在peng3创建开发库
+给本地主机分配数据库访问权限
+mysql -uroot -p
+grant all on *.* to caopeng@'%' identified by '1234560.';
+flush privileges;
+
+修改项目配置文件 ()
+
+上传代码到github上
+修改 .gitignore
+进入 github.com 创建新项目 WWW
+
+进入 git 客户端
+cd /d/WWW
+git init
+git add .
+git commit -m "添加框架"
+git remote add origin https://github.com/pengfen/WWW.git
+git push -u origin master
+
+创建构建脚本 (peng2) (参考linux/ext/structure.html)
+cd /home/wwwroot
+mkdir structure;
+cd structure;
+vim struct.sh;
+vim struct.php;
+
+[1] Production 生产环境
+
+开发环境初始化
+cmd
+d:
+D:>cd D:\files\phpStudy\php56n #需要目录 php.ini 去掉注释 extension=php_openssl.dll
+D:\files\phpStudy\php56n>D:\WWW\init.bat
+
+[0] Development
+
+注意权限
+chmod 0777 backend/web/assets
+chmod 0777 frontend/web/assets
+chmod 0755 yii
+
+------------------------------------------------------
+修改忽略文件(上传到github时忽略)
