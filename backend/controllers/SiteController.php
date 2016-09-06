@@ -60,7 +60,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        echo '调用成功';
+        echo '测试成功';
         //return $this->render('index');
     }
 
