@@ -80,7 +80,8 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $this->layout = false;
-        if (!Yii::$app->user->isGuest) {
+		return $this->render('login');
+        /*if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
@@ -91,7 +92,7 @@ class SiteController extends Controller
             return $this->render('login', [
                 'model' => $model,
             ]);
-        }
+        }*/
     }
 
     /**

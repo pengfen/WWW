@@ -22,7 +22,7 @@ class AuthController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['error','index'],
+                        'actions' => ['error', 'index', 'add'],
                         'allow' => true,
                     ],
                     [
@@ -54,7 +54,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * 列表显示
      *
      * @return string
      */
@@ -73,7 +73,15 @@ class AuthController extends Controller
 		]);
     }
 	
-		/**
+	/**
+	 * 添加界面
+	*/
+	public function actionAdd()
+	{
+		return $this->render('add');
+	}
+	
+	/**
 	  * 获取权限信息 
 	  * @param $flag true 只查询顶级,次顶级权限 false 查询所有权限
 	*/

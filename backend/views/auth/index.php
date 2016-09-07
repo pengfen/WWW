@@ -29,7 +29,12 @@
 </style>
 <div class="info">
     <div class="info_add">
-		<a href="">添加权限</a>
+	    <?php 
+		$request = Yii::$app->request->getBaseUrl();
+		echo "<a href='".$request."/index.php?r=auth/add'>添加权限</a>";
+		?>
+	
+		<!-- <a href="/index.php?r=auth/add">添加权限</a> -->
 	</div>
 	<ul>
 		<li class="info_title">
