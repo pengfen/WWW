@@ -22,7 +22,7 @@ class AuthController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error','index'],
+                        'actions' => ['error','index'],
                         'allow' => true,
                     ],
                     [
@@ -60,11 +60,43 @@ class AuthController extends Controller
      */
     public function actionIndex()
     {
-		// 获取权限管理的相关菜单
-		// $res = Auth::find()->where(['level'=>1])->asArray()->all(); // 获取所有数据
-		$auth = Auth::find()->select('name, controller, action')->where(['level'=>1])->asArray()->all(); // 查询需要的字段
-		return $this->render('index', [
-		    'auth' => $auth,
+		/* tp框架实现
+		$info = $this -> getinfo(true); // 获取所有权限信息
+		// 向模板中分配数据及显示模板
+		$this -> assign('title', '权限列表');
+		//$this -> assign('link', U('Auth/index'));
+		$this -> assign('info', $info);
+		$this -> display(); */
+		$info = $this -> getinfo(true); // 获取所有权限信息
+		return $this->render('index',[
+		    'auth' => $info,
 		]);
     }
+	
+		/**
+	  * 获取权限信息 
+	  * @param $flag true 只查询顶级,次顶级权限 false 查询所有权限
+	*/
+	private function getinfo($flag = false){
+		if ($flag == true) {
+			$info = Auth::find()->select('id, name, controller, action, addtime, level')->where(['<', 'level', 2])->asArray()->all();
+		} else {
+			$info = Auth::find()->select('id, name, controller, action, addtime, level')->asArray()->all();
+		}
+		/* tp框架实现
+		$auth = D('Auth');
+		if ($flag == true){
+			$map = array();
+			$map['level'] = array('lt', 2);
+			$info = $auth -> where($map) -> order('path asc') -> select();
+		} else {
+			$info = $auth -> order('path asc') -> select();
+		}*/
+		// 处理缩进关系(根据级别缩进)
+		foreach ($info as $k => $v) {
+			// echo $k.' : '.$v['level']; 0 : 0 1 : 1 2 : 1 3 : 0 4 : 1
+			$info[$k]['name'] = str_repeat("&nbsp;&nbsp;", $v['level']).$info[$k]['name'];
+		}
+		return $info;
+	}
 }
