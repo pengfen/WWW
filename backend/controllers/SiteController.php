@@ -5,7 +5,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
+use backend\models\Auth;
 
 /**
  * Site controller
@@ -60,8 +60,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        echo '测试成功';
-        //return $this->render('index');
+        // 获取权限管理的相关菜单
+        // $res = Auth::find()->where(['level'=>1])->asArray()->all(); // 获取所有数据
+        $auth = Auth::find()->select('name, controller, action')->where(['pid'=>1])->asArray()->all(); // 查询需要的字段
+        // 获取资料管理的相关菜单
+        $source = Auth::find()->select('name, controller, action')->where(['pid'=>14, 'isShow'=>0])->asArray()->all(); // 查询需要的字段
+        return $this->render('index', [
+            'auth' => $auth,
+            'source' => $source
+        ]);
+        return $this->render('index');
     }
 
     /**
