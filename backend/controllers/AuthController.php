@@ -6,6 +6,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\models\Auth;
+use backend\models\Upload;
 use yii\data\Pagination;
 
 /**
@@ -23,7 +24,7 @@ class AuthController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['error', 'index', 'add'],
+                        'actions' => ['error', 'index', 'add', 'insert'],
                         'allow' => true,
                     ],
                     [
@@ -81,6 +82,23 @@ class AuthController extends Controller
 	public function actionAdd()
 	{
 		return $this->render('add');
+	}
+
+	public function actionInsert() {
+		$newdir = 'upload/'.date('Y-h-m', time());
+		$dir = Yii::$app->basePath.'/web/'.$newdir;
+		//$dir = Yii::$app->basePath.'\web\upload';
+		$files = $_FILES['img'];
+		$info = Upload::upload($files, $dir, $newdir, 2000000, array('image/png', 'image/gif', 'image/jpeg'));
+		//判断是否上传成功
+		if ($info['success']){
+			echo "上传成功！<br>";
+			echo "文件路径：".$info['info'].'<br>';
+		}else {
+			echo "上传失败！<br>";
+			echo "错误原因：".$info['info'].'<br>';
+		}
+		
 	}
 	
 	/**

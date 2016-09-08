@@ -7,3 +7,6 @@ index.php --- index0907.php
 
 20160908 修改分页
 main.php 添加分页样式 yii分页介绍参考page.html
+
+20160908 添加文章
+添加sql

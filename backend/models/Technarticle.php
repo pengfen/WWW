@@ -16,7 +16,6 @@ class Technarticle extends ActiveRecord {
 		return [
 		    ['title', 'required', 'message'=>'标题不能为空'],
 			['content', 'required', 'message'=>'内容不能为空'],
-			['img', 'file', 'message'=>'']
 		];
 	}
 	

@@ -28,7 +28,7 @@
     <?php
     foreach ($source as $val) {
         $request = Yii::$app->request->getBaseUrl();
-        echo "<span><a href='".$request."/".strtolower($val['controller'])."/".$val['action']."'>".$val['name']."</a></span>";
+        echo "<span><a href='".$request."/index.php?r=".strtolower($val['controller'])."/".$val['action']."'>".$val['name']."</a></span>";
     }
     ?>
     <img src="../images/bg.png"/>
