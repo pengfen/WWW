@@ -25,7 +25,7 @@ class TechnarticleController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error','index','add','insert'],
+                        'actions' => ['login', 'error','index','add','insert', 'detail'],
                         'allow' => true,
                     ],
                     [
@@ -108,4 +108,9 @@ class TechnarticleController extends Controller
 			]);
 		}
 	}
+
+    // 查看详情
+    public function actionDetail() {
+        return $this->render('detail');
+    } 
 }

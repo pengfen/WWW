@@ -51,7 +51,9 @@
 				echo "<span class='author'>".$val['uid']."</span>";
 				echo "<span class='author'>".$val['title']."</span>";
 				echo "<span class='date'>".$val['addtime']."</span>";
-				echo "<span class='oper'>操作</span>";
+				echo "<span class='oper'>";
+				echo "<a href='".$request."/index.php?r=technarticle/detail'>详情</a>";
+				echo "</span>";
 				echo "</li>";
 				
 				//echo "<span><a href='".$request."/".$val['controller']."/".$val['action']."'>".$val['name']."</a></span>";
