@@ -14,9 +14,6 @@
 	.info .info_pid {
 		width: 200px; height: 40px; padding-left: 8px; border-radius: 5px;
 	}
-	.content_area, .content_area .label {
-		height: 400px; line-height: 400px; 
-	}
 	.info .info_content {
 		width: 1000px; height: 390px; padding-left: 8px; border-radius: 5px;
 	}
@@ -27,22 +24,20 @@
 
 <div class="info">
     <ul>
-	    <li class="">
+	    <li>
 		    <span class="label">标题</span>
-			<input type="text" class="info_title" name="title" vlaue="" placeholder=请输入标题 >
+			<span><?php echo $info['title'];?></span>
 		</li>
-		<li class="">
-		    <span class="label">所属分类</span>
-			<select class="info_pid" name="pid">
-			    <option value='0'>请选择所属分类</option>
-			</select>
+		<li>
+		    <span class="label">摘要</span>
+			<span><?php echo $info['summary']?></span>
 		</li>
-		<li class="content_area" style="height: 400px; line-height: 400px;">
+		<li>
 		    <span class="label">内容</span>
-			<textarea class="info_content" name="content"></textarea>
+			<div><?php echo nl2br($info['content']);?></div>
 		</li>
-		<li class="">
-		    <img src=""/>
+		<li>
+		    <img src="<?php echo $info['img']?>"/>
 		</li>
 	</ul>
 </div>

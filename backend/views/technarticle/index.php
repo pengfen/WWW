@@ -52,7 +52,7 @@
 				echo "<span class='author'>".$val['title']."</span>";
 				echo "<span class='date'>".$val['addtime']."</span>";
 				echo "<span class='oper'>";
-				echo "<a href='".$request."/index.php?r=technarticle/detail'>详情</a>";
+				echo "<a href='".$request."/index.php?r=technarticle/detail&id=".$val['id']."'>详情</a>";
 				echo "</span>";
 				echo "</li>";
 				

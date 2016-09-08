@@ -87,16 +87,20 @@ class TechnarticleController extends Controller
 		// 实例化数据表
 		$Technarticle = new Technarticle();
 		$Technarticle->title = $postData['title'];
-		$Technarticle->content = $postData['content'];
+		// 内容使用 htmlspecialchars 过滤 页面显示使用nl2br反过滤
+		$Technarticle->content = htmlspecialchars($postData['content'], ENT_QUOTES);
 
-        $newdir = 'upload/'.date('Y-h-m', time()).'/';
-        $dir = Yii::$app->basePath.'/web/'.$newdir;
-        $files = $_FILES['img'];
-        $info = Upload::upload($files, $dir, $newdir, 2000000, array('image/png', 'image/gif', 'image/jpeg'));
-        //判断是否上传成功
-        if ($info['success']){
-            $Technarticle->img = $info['info'];
-        }
+        if (!empty($_FILES)) {
+			$newdir = 'upload/'.date('Y-m-d', time()).'/';
+			$dir = Yii::$app->basePath.'/web/'.$newdir;
+			$files = $_FILES['img'];
+			$info = Upload::upload($files, $dir, $newdir, 2000000, array('image/png', 'image/gif', 'image/jpeg'));
+			//判断是否上传成功
+			if ($info['success']){
+				$Technarticle->img = $info['info'];
+			}
+		}
+		
 
 		// 校验 校验通过跳转到列表页 不通过跳转到添加页
 		if ($Technarticle->validate()) {
@@ -111,6 +115,11 @@ class TechnarticleController extends Controller
 
     // 查看详情
     public function actionDetail() {
-        return $this->render('detail');
+		$request = Yii::$app->request->get();
+		$id = $request['id'];
+		$info = Technarticle::find()->where(['id'=>$id])->asArray()->one();
+        return $this->render('detail', [
+		    'info' => $info,
+		]);
     } 
 }

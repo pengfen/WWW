@@ -26,7 +26,13 @@
 </style>
 
 <div class="info">
+    <?php 
+	$request = Yii::$app->request->getBaseUrl();
+	echo "<form action=".$request."/index.php?r=technarticle/insert method='post' enctype='multipart/form-data'>";
+	?>
+	<!--
     <form action="/index.php?r=technarticle/insert" method="post" enctype="multipart/form-data">
+	-->
 	    <ul>
 		    <li class="">
 			    <span class="label">标题</span>
