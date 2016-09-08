@@ -29,26 +29,30 @@
     <form action="" method="post" enctype="multipart/form-data">
 	    <ul>
 		    <li class="">
-			    <span class="label">标题</span>
-				<input type="text" class="info_title" name="title" vlaue="" placeholder=请输入标题 >
+			    <span class="label">权限名</span>
+				<input type="text" class="info_title" name="title" vlaue="" placeholder=请输入权限名 >
 			</li>
 			<li class="">
-			    <span class="label">所属分类</span>
+			    <span class="label">权限父级</span>
 				<select class="info_pid" name="pid">
-				    <option value='0'>请选择所属分类</option>
+				    <option value='0'>请选择父级权限</option>
 				</select>
 			</li>
-			<li class="content_area" style="height: 400px; line-height: 400px;">
-			    <span class="label">内容</span>
-				<textarea class="info_content" name="content"></textarea>
+			<li class="">
+			    <span class="label">权限控制器</span>
+				<input type="text" class="info_title" name="title" vlaue="" placeholder=请输入权限控制器名 >
 			</li>
 			<li class="">
-			    <span class="label">上传图片</span>
-				<input type="file" class="info_title" name="title" vlaue="" placeholder=请输入标题 >
+			    <span class="label">权限操作方法</span>
+				<input type="text" class="info_title" name="title" vlaue="" placeholder=请输入权限操方法名 >
+			</li>
+			<li class="">
+			    <span class="label">权限关联图</span>
+				<input type="file" class="info_title" name="title" vlaue="" placeholder=请上传权限关联图 >
 			</li>
 			<li class="">
 			    <span class="label"></span>
-				<input type="submit" class="info_btn" value="添加文章"/>
+				<input type="submit" class="info_btn" value="添加权限"/>
 			</li>
 		</ul>
 	</form>

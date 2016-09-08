@@ -6,6 +6,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\models\Auth;
+use yii\data\Pagination;
 
 /**
  * Site controller
@@ -69,7 +70,8 @@ class AuthController extends Controller
 		$this -> display(); */
 		$info = $this -> getinfo(true); // 获取所有权限信息
 		return $this->render('index',[
-		    'auth' => $info,
+		    'auth' => $info['model'],
+		    'pages' => $info['pages'],
 		]);
     }
 	
@@ -87,10 +89,12 @@ class AuthController extends Controller
 	*/
 	private function getinfo($flag = false){
 		if ($flag == true) {
-			$info = Auth::find()->select('id, name, controller, action, addtime, level')->where(['<', 'level', 2])->asArray()->all();
+			$info = Auth::find()->select('id, name, controller, action, addtime, level')->where(['<', 'level', 2]);
 		} else {
-			$info = Auth::find()->select('id, name, controller, action, addtime, level')->asArray()->all();
+			$info = Auth::find()->select('id, name, controller, action, addtime, level');
 		}
+		$pages = new Pagination(['totalCount' =>$info->count(), 'pageSize' => '2']);
+        $model = $info->offset($pages->offset)->limit($pages->limit)->asArray()->all();
 		/* tp框架实现
 		$auth = D('Auth');
 		if ($flag == true){
@@ -101,10 +105,12 @@ class AuthController extends Controller
 			$info = $auth -> order('path asc') -> select();
 		}*/
 		// 处理缩进关系(根据级别缩进)
-		foreach ($info as $k => $v) {
+		foreach ($model as $k => $v) {
 			// echo $k.' : '.$v['level']; 0 : 0 1 : 1 2 : 1 3 : 0 4 : 1
-			$info[$k]['name'] = str_repeat("&nbsp;&nbsp;", $v['level']).$info[$k]['name'];
+			$model[$k]['name'] = str_repeat("&nbsp;&nbsp;", $v['level']).$model[$k]['name'];
 		}
-		return $info;
+		$data['model'] = $model;
+		$data['pages'] = $pages;
+		return $data;
 	}
 }

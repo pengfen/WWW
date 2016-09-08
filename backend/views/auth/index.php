@@ -1,3 +1,6 @@
+<?php 
+use yii\widgets\LinkPager;
+?>
 <style>
     .info {
 		width: 90%; margin: 10px auto; 
@@ -69,4 +72,6 @@
 		</li>
 		-->
 	</ul>
+
+	<?= LinkPager::widget(['pagination' => $pages]); ?>
 </div>

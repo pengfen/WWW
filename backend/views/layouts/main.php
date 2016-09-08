@@ -72,6 +72,14 @@ AppAsset::register($this);
         .wrap {
             width: 1900px; margin: 0px auto;
         }
+
+        /* 分页处理 */
+        ul.pagination {
+            width: 1000px; height: 39px; margin: 10px auto;
+        }
+        .pagination li {
+            width: 39px; margin-right: 8px; height: 39px; line-height: 39px; background: #f3f3f3; text-align: center; float: left;
+        }
     </style>
 </head>
 <body>
