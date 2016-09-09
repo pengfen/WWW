@@ -5,7 +5,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use backend\models\Auth;
+use backend\models\Technarticlecate;
 
 /**
  * Site controller
@@ -23,7 +23,7 @@ class TechnarticlecateController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error','index'],
+                        'actions' => ['login', 'error', 'index', 'add', 'insert'],
                         'allow' => true,
                     ],
                     [
@@ -61,17 +61,23 @@ class TechnarticlecateController extends Controller
      */
     public function actionIndex()
     {
-		echo 'kkkk';
-		exit;
 		// 获取权限管理的相关菜单
 		// $res = Auth::find()->where(['level'=>1])->asArray()->all(); // 获取所有数据
-		$auth = Auth::find()->select('name, controller, action')->where(['pid'=>1])->asArray()->all(); // 查询需要的字段
-		// 获取资料管理的相关菜单
-		$source = Auth::find()->select('name, controller, action')->where(['pid'=>14, 'isShow'=>0])->asArray()->all(); // 查询需要的字段
+		$auth = Auth::find()->select('name, controller, action')->where(['pid'=>1])->asArray()->all(); // 
 		return $this->render('index', [
 		    'auth' => $auth,
 			'source' => $source
 		]);
     }
 	
+    /**
+     * 添加界面 
+     */
+    public function actionAdd()
+    {
+        /* tp
+        $info = $this -> getinfo(); // 获取顶级,次顶级权限
+        $this -> assign('info', $info);
+        $this -> display(); */
+    }
 }

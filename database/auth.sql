@@ -23,20 +23,20 @@ CREATE TABLE IF NOT EXISTS `resource_role` (
   `aids` varchar(128) NOT NULL DEFAULT '' COMMENT '权限ids',
   `aac` text COMMENT '控制器-操作方法',
   `addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
-  `mid` int unsigned DEFAULT 0 COMMENT '创建者',
+  `uid` int unsigned DEFAULT 0 COMMENT '创建者',
   `updatetime` int unsigned DEFAULT 0 COMMENT '修改时间',
-  `uid` int unsigned DEFAULT 0 COMMENT '修改人',
+  `mid` int unsigned DEFAULT 0 COMMENT '修改人',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台角色表';
 
 ALTER TABLE `resource_role`
 ADD COLUMN `addtime` int unsigned DEFAULT 0 COMMENT '添加时间' AFTER `aac`;
 ALTER TABLE `resource_role`
-ADD COLUMN `mid` int unsigned DEFAULT 0 COMMENT '创建者';
+ADD COLUMN `uid` int unsigned DEFAULT 0 COMMENT '创建者';
 ALTER TABLE `resource_role`
 ADD COLUMN `updatetime` int unsigned DEFAULT 0 COMMENT '修改时间';
 ALTER TABLE `resource_role`
-ADD COLUMN `uid` int unsigned DEFAULT 0 COMMENT '修改人';
+ADD COLUMN `mid` int unsigned DEFAULT 0 COMMENT '修改人';
 
 -- 权限表
 CREATE TABLE IF NOT EXISTS `resource_auth` (
@@ -50,9 +50,9 @@ CREATE TABLE IF NOT EXISTS `resource_auth` (
   `image` varchar(255) NOT NULL DEFAULT '' COMMENT '权限关联图',
   `isShow` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否显示 0 显示 1 不显示',
   `addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
-  `mid` int unsigned DEFAULT 0 COMMENT '创建者',
+  `uid` int unsigned DEFAULT 0 COMMENT '创建者',
   `updatetime` int unsigned DEFAULT 0 COMMENT '修改时间',
-  `uid` int unsigned DEFAULT 0 COMMENT '修改人',
+  `mid` int unsigned DEFAULT 0 COMMENT '修改人',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台权限表';
 
@@ -63,11 +63,11 @@ INSERT INTO `data_auth` (`id`, `name`, `pid`, `controller`, `action`, `path`, `l
 ALTER TABLE `resource_auth`
 ADD COLUMN `addtime` int unsigned DEFAULT 0 COMMENT '添加时间' AFTER `image`;
 ALTER TABLE `resource_auth`
-ADD COLUMN `mid` int unsigned DEFAULT 0 COMMENT '创建者';
+ADD COLUMN `uid` int unsigned DEFAULT 0 COMMENT '创建者';
 ALTER TABLE `resource_auth`
 ADD COLUMN `updatetime` int unsigned DEFAULT 0 COMMENT '修改时间';
 ALTER TABLE `resource_auth`
-ADD COLUMN `uid` int unsigned DEFAULT 0 COMMENT '修改人';
+ADD COLUMN `mid` int unsigned DEFAULT 0 COMMENT '修改人';
 ALTER TABLE `resource_auth`
 ADD COLUMN `isShow` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否显示 0 显示 1 不显示';
 

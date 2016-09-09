@@ -56,7 +56,9 @@ use yii\widgets\LinkPager;
 			echo "<span class='title'>".$val['controller']."</span>";
 			echo "<span class='title'>".$val['action']."</span>";
 			echo "<span class='date'>".$val['addtime']."</span>";
-			echo "<span class='oper'>修改</span>";
+			echo "<span class='oper'>";
+			echo "<a href='/index.php?r=auth/edit&id=".$val['id']."'>修改</a>";
+			echo "</span>";
 			echo "</li>";
 		}
 		?>

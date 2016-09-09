@@ -29,8 +29,12 @@
 			<span><?php echo $info['title'];?></span>
 		</li>
 		<li>
-		    <span class="label">摘要</span>
-			<span><?php echo $info['summary']?></span>
+		    <span class="label">作者</span>
+			<span><?php echo $info['username']?></span>
+		</li>
+		<li>
+		    <span class="label">添加时间</span>
+			<span><?php echo date('Y-m-d H:i:s', $info['addtime']);?></span>
 		</li>
 		<li>
 		    <span class="label">内容</span>

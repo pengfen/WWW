@@ -1,7 +1,6 @@
 -- 技术文章表
 CREATE TABLE `resource_techn_article` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
   `title` varchar(30) NOT NULL DEFAULT '' COMMENT '文章标题',
   `summary` varchar(200) DEFAULT NULL DEFAULT '' COMMENT '文章摘要',
   `img` varchar(255) NOT NULL DEFAULT '' COMMENT '文章图片',
@@ -10,9 +9,9 @@ CREATE TABLE `resource_techn_article` (
   `state` tinyint(1) DEFAULT '0' COMMENT '添加状态 0 后台添加 1 前后添加',
   `views` int(11) DEFAULT '0' COMMENT '浏览量',
   `addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
-  `mid` int unsigned DEFAULT 0 COMMENT '创建者',
+  `uid` int unsigned DEFAULT 0 COMMENT '创建者',
   `updatetime` int unsigned DEFAULT 0 COMMENT '修改时间',
-  `uuid` int unsigned DEFAULT 0 COMMENT '修改人',
+  `mid` int unsigned DEFAULT 0 COMMENT '修改人',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='技术文章表';
 
@@ -24,9 +23,9 @@ CREATE TABLE `resource_techn_article_cate` (
   `path` varchar(255) NOT NULL DEFAULT '0,' COMMENT '全路径',
   `img` varchar(100) NOT NULL DEFAULT '' COMMENT '分类图片',
   `addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
-  `mid` int unsigned DEFAULT 0 COMMENT '创建者',
+  `uid` int unsigned DEFAULT 0 COMMENT '创建者',
   `updatetime` int unsigned DEFAULT 0 COMMENT '修改时间',
-  `uid` int unsigned DEFAULT 0 COMMENT '修改人',
+  `mid` int unsigned DEFAULT 0 COMMENT '修改人',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='技术文章分类表';
 

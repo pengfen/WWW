@@ -24,7 +24,7 @@ class AuthController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['error', 'index', 'add', 'insert'],
+                        'actions' => ['error', 'index', 'add', 'insert', 'edit'],
                         'allow' => true,
                     ],
                     [
@@ -81,10 +81,30 @@ class AuthController extends Controller
 	*/
 	public function actionAdd()
 	{
-		return $this->render('add');
+		/* tp框架实现
+		$info = $this -> getinfo(); // 获取顶级,次顶级权限
+		$this -> assign('info', $info);
+		$this -> display();*/
+		$info = $this -> getinfo(); // 获取顶级,次顶级权限 针对页面中的权限父级
+		return $this->render('add', [
+			'info' => $info['model'],
+		]);
 	}
 
 	public function actionInsert() {
+		// 获取表单数据
+		$request = Yii::$app->request;
+        $postData = $request->post();
+
+        // 实例化数据表
+		$auth = new Auth();
+		$auth->name = $postData['name'];
+		$auth->pid = $postData['pid'];
+		$auth->controller = $postData['controller'];
+		$auth->action = $postData['action'];
+		$auth->uid = '1';
+		$auth->addtime = time();
+
 		if (!empty($_FILES)) {
 			$newdir = 'upload/'.date('Y-m-d', time()).'/';
 			$dir = Yii::$app->basePath.'/web/'.$newdir;
@@ -95,7 +115,42 @@ class AuthController extends Controller
 				$Technarticle->img = $info['info'];
 			}
 		}
-		
+
+		// 校验 校验通过跳转到列表页 不通过跳转到添加页
+		if ($auth->validate()) {
+			$auth->save();
+			// 获取当前添加数据记录的ID
+			$id = Yii::$app->db->getLastInsertId();
+			$path = $this->getPath($postData['pid'], $id);
+			// level 全路径里边中划线的个数
+		    $level = count(explode('-', $path)) - 1;
+		    $auth->id = $id;
+		    $auth->path = $path;
+		    $auth->level = $level;
+		    $auth->save();
+            return Yii::$app->getResponse()->redirect('/index.php?r=auth/index');
+		} else {
+			return $this->render('add', [
+			    'errors'=>$auth->getErrors(),
+			]);
+		}
+	}
+
+	/**
+	 * 修改界面
+	 */
+	public function actionEdit() 
+	{
+		$request = Yii::$app->request->get();
+		$id = $request['id'];
+		//$data = Auth::find()->select("id, name, controller, action, addtime")->where(['id' => $id])->asArray()->one();
+		$data = Auth::find($id)->select("id, name, controller, action, addtime")->asArray()->one();
+		//$uidArr = (new Query())->select('uid')->from(self::UIBTB)->where('username = :username', [':username' => $username])->one();
+		$info = $this -> getinfo(); // 获取顶级,次顶级权限 针对页面中的权限父级
+		return $this->render('edit', [
+			'info' => $info['model'],
+			'data' => $data,
+		]);
 	}
 	
 	/**
@@ -103,13 +158,20 @@ class AuthController extends Controller
 	  * @param $flag true 只查询顶级,次顶级权限 false 查询所有权限
 	*/
 	private function getinfo($flag = false){
-		if ($flag == true) {
-			$info = Auth::find()->select('id, name, controller, action, addtime, level')->where(['<', 'level', 2]);
+		if ($flag == true) { // 只针对列表页进行分页显示
+			$info = Auth::find()
+			->select('id, name, controller, action, addtime, level')
+			->where(['<', 'level', 2])
+			->orderBy(['path' => SORT_ASC]);
+			$pages = new Pagination(['totalCount' =>$info->count(), 'pageSize' => '10']);
+            $model = $info->offset($pages->offset)->limit($pages->limit)->asArray()->all();
+            $data['pages'] = $pages;
 		} else {
-			$info = Auth::find()->select('id, name, controller, action, addtime, level');
+			$model = Auth::find()
+			->select('id, name, controller, action, addtime, level')
+			->orderBy(['path' => SORT_ASC])->asArray()->all();
 		}
-		$pages = new Pagination(['totalCount' =>$info->count(), 'pageSize' => '2']);
-        $model = $info->offset($pages->offset)->limit($pages->limit)->asArray()->all();
+		
 		/* tp框架实现
 		$auth = D('Auth');
 		if ($flag == true){
@@ -125,7 +187,26 @@ class AuthController extends Controller
 			$model[$k]['name'] = str_repeat("&nbsp;&nbsp;", $v['level']).$model[$k]['name'];
 		}
 		$data['model'] = $model;
-		$data['pages'] = $pages;
 		return $data;
+	}
+
+	/**
+	  * 获取全路径
+	  * $pid 权限父id
+	  * $id 记录id 
+	*/
+	private function getPath($pid, $id){
+		// path 父级全路径与本身id 的连接信息 如 1-3 (顶级权限则为id本身)
+		if ($pid == 0) {
+			$path = $id; // 顶级权限
+		} else { // 1-3 ...
+			/* tp框架查找
+			$pinfo = $this -> find($pid);
+			$p_path = $pinfo['path']; */
+			$pinfo = Auth::find()->select('path')->where(['id' => $pid])->asArray()->one();
+			$p_path = $pinfo['path'];
+			$path = $p_path.'-'.$id;
+		}
+		return $path;
 	}
 }

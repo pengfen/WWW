@@ -26,11 +26,12 @@
 </style>
 
 <div class="info">
-    <form action="/index.php?r=auth/insert" method="post" enctype="multipart/form-data">
+    <form action="/index.php?r=auth/upd" method="post">
+    <input type="hidden" name="id" value="<?php echo $data['id'];?>">
 	    <ul>
 		    <li class="">
 			    <span class="label">权限名</span>
-				<input type="text" class="info_title" name="name" value="" placeholder=请输入权限名 >
+				<input type="text" class="info_title" name="name" value="<?php echo $data['name'];?>"  placeholder=请输入权限名>
 			</li>
 			<li class="">
 			    <span class="label">权限父级</span>
@@ -45,15 +46,15 @@
 			</li>
 			<li class="">
 			    <span class="label">权限控制器</span>
-				<input type="text" class="info_title" name="controller" value="" placeholder=请输入权限控制器名 >
+				<input type="text" class="info_title" name="controller" vlaue="<?php echo $data['controller'];?>" placeholder=请输入权限控制器名 >
 			</li>
 			<li class="">
 			    <span class="label">权限操作方法</span>
-				<input type="text" class="info_title" name="action" value="" placeholder=请输入权限操方法名 >
+				<input type="text" class="info_title" name="action" vlaue="<?php echo $data['action'];?>" placeholder=请输入权限操方法名 >
 			</li>
 			<li class="">
-			    <span class="label">权限关联图</span>
-				<input type="file" class="info_title" name="img" value="" placeholder=请上传权限关联图 >
+			    <span class="label">添加时间</span>
+				<span><?php echo date('Y-m-d H:i:s', $data['addtime']);?></span>
 			</li>
 			<li class="">
 			    <span class="label"></span>

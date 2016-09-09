@@ -7,7 +7,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\models\Technarticle;
 use backend\models\Upload;
-use yii\web\UploadedFile;
+use backend\models\Manager;
+use backend\models\User;
 
 /**
  * Site controller
@@ -89,6 +90,9 @@ class TechnarticleController extends Controller
 		$Technarticle->title = $postData['title'];
 		// 内容使用 htmlspecialchars 过滤 页面显示使用nl2br反过滤
 		$Technarticle->content = htmlspecialchars($postData['content'], ENT_QUOTES);
+        // 后台管理员添加
+        $Technarticle->uid = '1';
+        $Technarticle->addtime = time();
 
         if (!empty($_FILES)) {
 			$newdir = 'upload/'.date('Y-m-d', time()).'/';
@@ -117,7 +121,14 @@ class TechnarticleController extends Controller
     public function actionDetail() {
 		$request = Yii::$app->request->get();
 		$id = $request['id'];
-		$info = Technarticle::find()->where(['id'=>$id])->asArray()->one();
+		$info = Technarticle::find()->select("uid, title, addtime, content, img, state")->where(['id'=>$id])->asArray()->one();
+        if ($info['state'] == 0) {
+            $model = new Manager;
+        } else {
+            $model = new User;
+        }
+        $user = $model::find()->select("username")->where(['id'=>$info['uid']])->asArray()->one();
+        $info['username'] = $user['username'];
         return $this->render('detail', [
 		    'info' => $info,
 		]);
