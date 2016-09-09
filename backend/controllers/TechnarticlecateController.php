@@ -61,12 +61,10 @@ class TechnarticlecateController extends Controller
      */
     public function actionIndex()
     {
-		// 获取权限管理的相关菜单
-		// $res = Auth::find()->where(['level'=>1])->asArray()->all(); // 获取所有数据
-		$auth = Auth::find()->select('name, controller, action')->where(['pid'=>1])->asArray()->all(); // 
+		// 获取所有分类信息
+		$cate = Technarticlecate::getinfo();
 		return $this->render('index', [
-		    'auth' => $auth,
-			'source' => $source
+		    'cate' => $cate,
 		]);
     }
 	
