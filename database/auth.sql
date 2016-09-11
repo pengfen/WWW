@@ -9,12 +9,19 @@ CREATE TABLE IF NOT EXISTS `resource_manager` (
   `logtime` int(10) unsigned DEFAULT 0 COMMENT '登录时间',
   `email` varchar(30) DEFAULT NULL COMMENT '邮箱',
   `rid` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '角色id',
+  `flag` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否在职 0离职 1在职',
+  `state` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态 0无效 1有效',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='管理员表';
 
 INSERT INTO `resource_manager` (`id`, `username`, `password`, `regtime`, `logtime`, `email`, `rid`) VALUES
 (1, 'admin', password(123456), unix_timestamp(), 0, 'caopeng8787@163.com', 0),
 (2, 'apeng', 'e10adc3949ba59abbe56e057f20f883e', unix_timestamp(), 0, '411104493@qq.com', 1);
+
+ALTER TABLE `resource_manager`
+ADD COLUMN `flag` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否在职 0离职 1在职' AFTER `rid`;
+ALTER TABLE `resource_manager` 
+ADD COLUMN  `state` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态 0无效 1有效';
 
 -- 角色表
 CREATE TABLE IF NOT EXISTS `resource_role` (

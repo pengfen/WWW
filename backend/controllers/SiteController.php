@@ -6,41 +6,31 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\models\Auth;
+use backend\models\Manager;
 
 /**
- * Site controller
- */
+ * 后台首页
+ * 作者: caopeng
+ * 时间: 2016-09-11
+*/
 class SiteController extends Controller
 {
-    /**
+	//public $layout = false; // 整个控制器不使用布局文件
+	
+	/**
+	 * 使用自定义类做action前置过滤
+	 *
      * @inheritdoc
      */
     public function behaviors()
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error', 'index'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
+                'class' => 'backend\filters\AccessFilter',
             ],
         ];
     }
-
+	
     /**
      * @inheritdoc
      */
@@ -54,7 +44,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * 首页显示
      *
      * @return string
      */
@@ -73,14 +63,32 @@ class SiteController extends Controller
     }
 
     /**
-     * Login action.
+     * 登录页
      *
      * @return string
      */
     public function actionLogin()
     {
-        $this->layout = false;
-		return $this->render('login');
+        $this->layout = false; // 此操作方法不使用布局文件
+		
+		if (Yii::$app->request->post()) {
+			$data = Yii::$app->request->post();
+			$username = $data['username'];
+			$password = $data['password'];
+			$info = Manager::findByUsername($username);
+			if ($info) {
+				if ($info['password'] == md5($password)) {
+					return $this->goBack();
+				} else {
+					return $this->render('login');
+				}
+			} else {
+				return $this->render('login');
+			}
+		} else {
+			return $this->render('login');
+		}
+		
         /*if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -96,7 +104,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Logout action.
+     * 退出
      *
      * @return string
      */

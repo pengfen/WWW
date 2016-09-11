@@ -10,35 +10,22 @@ use backend\models\Upload;
 use yii\data\Pagination;
 
 /**
- * Site controller
- */
+ * 权限控制器 (权限列表 添加权限 修改权限 删除权限)
+ * 作者: caopeng
+ * 时间: 2016-09-11
+*/
 class AuthController extends Controller
 {
 	/**
+	 * 使用自定义类做action前置过滤
+	 *
      * @inheritdoc
      */
     public function behaviors()
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['error', 'index', 'add', 'insert', 'edit'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
+                'class' => 'backend\filters\AccessFilter',
             ],
         ];
     }

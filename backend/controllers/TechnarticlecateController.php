@@ -73,7 +73,14 @@ class TechnarticlecateController extends Controller
      */
     public function actionAdd()
     {
-        /* tp
+        $curl = curl_init("http://localhost:8080/data/wel");
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);			// 执行之后不直接打印出来
+        $con = curl_exec($curl);
+        curl_close($curl);
+		$res = json_decode($con);
+        var_dump($res);
+		exit;
+		/* tp
         $info = $this -> getinfo(); // 获取顶级,次顶级权限
         $this -> assign('info', $info);
         $this -> display(); */
