@@ -72,12 +72,17 @@ class SiteController extends Controller
         $this->layout = false; // 此操作方法不使用布局文件
 		
 		if (Yii::$app->request->post()) {
+            // 获取 post 请求数据
 			$data = Yii::$app->request->post();
 			$username = $data['username'];
 			$password = $data['password'];
 			$info = Manager::findByUsername($username);
 			if ($info) {
 				if ($info['password'] == md5($password)) {
+                    $manager['id'] = $info['id'];
+                    $manager['username'] = $username;
+                    // 设置 session 数据
+                    Yii::$app->session->set('manager', $manager);
 					return $this->goBack();
 				} else {
 					return $this->render('login');
@@ -110,7 +115,8 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout();
+        // 删除 session
+        Yii::$app->session->remove('manager');
 
         return $this->goHome();
     }
