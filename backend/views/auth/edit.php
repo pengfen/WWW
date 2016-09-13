@@ -39,18 +39,22 @@
 				    <option value='0'>请选择父级权限</option>
 				    <?php
 				    foreach ($info as $val) {
-				    	echo "<option value='".$val['id']."'>".$val['name']."</option>";
+				    	if ($val['id'] == $data['pid']) {
+				    		echo "<option value='".$val['id']."' selected>".$val['name']."</option>";
+				    	} else {
+				    		echo "<option value='".$val['id']."'>".$val['name']."</option>";
+				    	}
 				    }
 				    ?>
 				</select>
 			</li>
 			<li class="">
 			    <span class="label">权限控制器</span>
-				<input type="text" class="info_title" name="controller" vlaue="<?php echo $data['controller'];?>" placeholder=请输入权限控制器名 >
+				<input type="text" class="info_title" name="controller" value="<?php echo $data['controller'];?>" placeholder=请输入权限控制器名 >
 			</li>
 			<li class="">
 			    <span class="label">权限操作方法</span>
-				<input type="text" class="info_title" name="action" vlaue="<?php echo $data['action'];?>" placeholder=请输入权限操方法名 >
+				<input type="text" class="info_title" name="action" value="<?php echo $data['action'];?>" placeholder=请输入权限操方法名 >
 			</li>
 			<li class="">
 			    <span class="label">添加时间</span>
@@ -58,7 +62,7 @@
 			</li>
 			<li class="">
 			    <span class="label"></span>
-				<input type="submit" class="info_btn" value="添加权限"/>
+				<input type="submit" class="info_btn" value="修改权限"/>
 			</li>
 		</ul>
 	</form>
