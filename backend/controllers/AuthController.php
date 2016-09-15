@@ -5,9 +5,10 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\data\Pagination;
 use backend\models\Auth;
 use backend\models\Upload;
-use yii\data\Pagination;
+use backend\models\Recycle;
 
 /**
  * 权限控制器 (权限列表 添加权限 修改权限 删除权限)
@@ -267,11 +268,12 @@ class AuthController extends Controller
 		$get = Yii::$app->request->get();
 		$id = $get['id'];
 		$info = Auth::findOne($id);
-		$img = $info->image; // 获取图片地址
+		$data['image'] = $info->image; // 获取图片地址
 		$res = $info->delete();
 		if ($res) {
 			// 图片回收
-			echo '删除成功';
+			Recycle::add($data);
+			return Yii::$app->getResponse()->redirect('/index.php?r=auth/index');
 		} else {
 			echo '删除失败';
 		}

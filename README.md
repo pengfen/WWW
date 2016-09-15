@@ -52,3 +52,8 @@ environments/            contains environment-based overrides
 tests                    contains various tests for the advanced application
     codeception/         contains tests developed with Codeception PHP Testing Framework
 ```
+注意 使用原生 html 表单提交时应该 配置enableCsrfValidation (不使用csrf校验)
+'request' => [
+	'cookieValidationKey' => 'resource',
+	'enableCsrfValidation' => false,
+],

@@ -52,14 +52,23 @@ class SiteController extends Controller
     {
         // 获取权限管理的相关菜单
         // $res = Auth::find()->where(['level'=>1])->asArray()->all(); // 获取所有数据
-        $auth = Auth::find()->select('name, controller, action')->where(['pid'=>1])->asArray()->all(); // 查询需要的字段
+        // $auth = Auth::find()->select('name, controller, action')->where(['pid'=>1])->asArray()->all(); // 查询需要的字段
         // 获取资料管理的相关菜单
-        $source = Auth::find()->select('name, controller, action')->where(['pid'=>14, 'isShow'=>0])->asArray()->all(); // 查询需要的字段
+        // $source = Auth::find()->select('name, controller, action')->where(['pid'=>14, 'isShow'=>0])->asArray()->all(); // 查询需要的字段
+        
+		//return $this->render('index', [
+        //    'auth' => $auth,
+        //    'source' => $source
+        //]);
+		
+		// 查询顶级分类
+		$pinfo = Auth::find()->select('id, image, name, controller, action')->where(['pid' => 0, 'isShow' => 0])->asArray()->all();
+		// 查询非顶级分类
+		$cinfo = Auth::find()->select('pid, name, controller, action, isShow')->where(['>', 'pid', 0])->asArray()->all();
         return $this->render('index', [
-            'auth' => $auth,
-            'source' => $source
-        ]);
-        return $this->render('index');
+		    'pinfo' => $pinfo,
+			'cinfo' => $cinfo,
+		]);
     }
 
     /**

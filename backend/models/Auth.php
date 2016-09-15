@@ -3,6 +3,7 @@ namespace backend\models;
 
 use yii\db\ActiveRecord;
 
+// 权限表 2016-09-15
 class Auth extends ActiveRecord {
 	
 	public static function tableName() {

@@ -3,7 +3,7 @@ namespace backend\models;
 
 use yii\db\ActiveRecord;
 
-// 技术文章表
+// 技术文章表 2016-09-15
 class Technarticle extends ActiveRecord {
 	
 	// 定义对应的表名

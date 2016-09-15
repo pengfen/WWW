@@ -4,7 +4,7 @@ namespace backend\models;
 use yii\db\ActiveRecord;
 use yii\data\Pagination;
 
-// 技术文章表
+// 技术文章表 2016-09-15
 class Technarticlecate extends ActiveRecord {
 	
 	// 定义对应的表名
