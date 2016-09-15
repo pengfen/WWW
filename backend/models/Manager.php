@@ -24,12 +24,9 @@ class Manager extends ActiveRecord implements IdentityInterface {
     public static function findByUsername($username)
     {
         //return static::findOne(['username' => $username, 'state' => self::STATUS_ACTIVE]);
-		$cate = new self;
-		$info = $cate::find()
-			->select('id,password')
-			->where(['username' => $username])
-			->asArray()->one();
-		return $info;
+		$manager = new self;
+		return $manager::find()->select('id,password')->where(['username' => $username])->asArray()->one();
+		//return $info;
     }
 	
 	/**

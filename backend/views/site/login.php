@@ -391,7 +391,7 @@
 	<body class='bgimg'>
 	    <h2>资料管理系统</h2>
 	    <!-- <form action="{$smarty.const.__CONTROLLER__}/checklogin" method="post"> -->
-	    <form action="" method="post">
+	    <form action="/index.php?r=site/login" method="post">
 	    	<ul class="login">
 				<li>
 					<span class='login-text'>用户名</span>
@@ -407,8 +407,7 @@
 				<li>
 					<span class='login-text fl'>验证码</span>
 					<input class='login-verify fl' name='code' type='text' size="6" placeholder='输入验证码'/>
-					<!-- <img class='verify-img fl' src='{$smarty.const.__CONTROLLER__/verify}' onclick="this.src='{$smarty.const.__CONTROLLER__}/verify?time='+Math.random()" />  
-					<img class='verify-img fl' src='__CONTROLLER__/verify' onclick="this.src='__CONTROLLER__/verify?time='+Math.random()" /> 
+                    <img class='verify-img fl' src='__CONTROLLER__/verify' onclick="this.src='__CONTROLLER__/verify?time='+Math.random()" /> 
 					<span class='error-text ml10'></span>
 				</li>-->
 				<li>
