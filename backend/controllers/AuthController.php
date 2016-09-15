@@ -89,7 +89,9 @@ class AuthController extends Controller
 		$auth->pid = $postData['pid'];
 		$auth->controller = $postData['controller'];
 		$auth->action = $postData['action'];
-		$auth->uid = '1';
+		// 获取当前管理员 id
+		$manager = Yii::$app->session->get('manager');
+		$auth->uid = $manager['id'];
 		$auth->addtime = time();
 
 		if (!empty($_FILES)) {
@@ -130,14 +132,51 @@ class AuthController extends Controller
 	{
 		$request = Yii::$app->request->get();
 		$id = $request['id'];
-		//$data = Auth::find()->select("id, name, controller, action, addtime")->where(['id' => $id])->asArray()->one();
-		$data = Auth::find($id)->select("id, name, controller, action, addtime")->asArray()->one();
+		$data = Auth::find()->select("id, pid, name, controller, action, addtime")->where(['id' => $id])->asArray()->one();
+		// find($id) 查询是总是第一条
+		// $data = Auth::find($id)->select("id, name, controller, action, addtime")->asArray()->one();
 		//$uidArr = (new Query())->select('uid')->from(self::UIBTB)->where('username = :username', [':username' => $username])->one();
 		$info = $this -> getinfo(); // 获取顶级,次顶级权限 针对页面中的权限父级
 		return $this->render('edit', [
 			'info' => $info['model'],
 			'data' => $data,
 		]);
+	}
+
+	/**
+	 * 修改数据
+	*/
+	public function actionUpd()
+	{
+		// 获取表单数据
+		$request = Yii::$app->request;
+        $postData = $request->post();
+
+        // 实例化数据表
+		//$auth = new Auth();
+		$id = $postData['id'];
+		$auth = Auth::findOne($id);
+		$auth->name = $postData['name'];
+		$auth->pid = $postData['pid'];
+		$auth->controller = $postData['controller'];
+		$auth->action = $postData['action'];
+		// 获取当前管理员 id
+		$manager = Yii::$app->session->get('manager');
+		$auth->mid = $manager['id'];
+		$auth->updatetime = time();
+		$path = $this->getPath($postData['pid'], $postData['id']);
+		// level 全路径里边中划线的个数
+		$level = count(explode('-', $path)) - 1;
+		$auth->path = $path;
+		$auth->level = $level;
+		if ($auth->validate()) {
+			$auth->save();
+            return Yii::$app->getResponse()->redirect('/index.php?r=auth/index');
+		} else {
+			return $this->render('add', [
+			    'errors'=>$auth->getErrors(),
+			]);
+		}    
 	}
 	
 	/**

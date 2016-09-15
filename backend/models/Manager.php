@@ -26,7 +26,7 @@ class Manager extends ActiveRecord implements IdentityInterface {
         //return static::findOne(['username' => $username, 'state' => self::STATUS_ACTIVE]);
 		$cate = new self;
 		$info = $cate::find()
-			->select('password')
+			->select('id,password')
 			->where(['username' => $username])
 			->asArray()->one();
 		return $info;
