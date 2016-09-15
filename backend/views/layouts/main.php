@@ -87,7 +87,7 @@ AppAsset::register($this);
 <div class="header">
     <div class="w">
         <ul class="fl nav-left">
-            <li><a href="">首页</a></li>
+            <li><a href="/index.php?r=site/index">首页</a></li>
         </ul>
         <ul class="fr nav-right">
             <li><a href="">个人中心</a></li>
