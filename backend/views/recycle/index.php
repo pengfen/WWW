@@ -2,9 +2,6 @@
     .info {
 		width: 90%; margin: 10px auto; 
 	}
-	.info_add {
-		width: 100px; height: 39px; line-height: 39px; background: #f2f2f2; margin: 10px 0px; text-align: center; font-size 20px; font-weight: bold;
-	}
     .info_title {
 		height: 49px; line-height: 49px; background: #f3f3f3; font-size: 18px; font-weight: bold; 
 	}
@@ -28,13 +25,6 @@
 	}
 </style>
 <div class="info">
-    <div class="info_add">
-	    <?php 
-		    $url = Yii::$app->request->getBaseUrl();
-			echo "<a href='".$url."/index.php?r=technarticle/add'>添加文章</a>";
-		?>
-		<!-- <a href="/">添加功能</a> -->
-	</div>
 	<ul>
 		<li class="info_title">
 			<span class="number">编号</span>
