@@ -141,6 +141,14 @@ class AuthController extends Controller
 	}
 	
 	/**
+	 * 修改数据
+	*/
+	public function actionUpd() 
+	{
+		//
+	}
+	
+	/**
 	  * 获取权限信息 
 	  * @param $flag true 只查询顶级,次顶级权限 false 查询所有权限
 	*/
