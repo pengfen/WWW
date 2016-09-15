@@ -26,35 +26,24 @@
 </style>
 
 <div class="info">
-    <?php 
-	$request = Yii::$app->request->getBaseUrl();
-	echo "<form action=".$request."/index.php?r=technarticle/insert method='post' enctype='multipart/form-data'>";
-	?>
-	<!--
-    <form action="/index.php?r=technarticle/insert" method="post" enctype="multipart/form-data">
-	-->
+    <form action="" method="post">
+	    <input type="hidden" name="id" value=<?php echo $info['id']; ?>/>
 	    <ul>
 		    <li class="">
-			    <span class="label">标题</span>
-				<input type="text" class="info_title" name="title" value="" placeholder=请输入标题 >
+			    <span class="label">用户名</span>
+				<input type="text" class="info_title" name="username" value="<?php echo $info['username']; ?>" placeholder=请输入用户名 >
 			</li>
 			<li class="">
-			    <span class="label">所属分类</span>
-				<select class="info_pid" name="pid">
-				    <option value='0'>请选择所属分类</option>
-				</select>
-			</li>
-			<li class="content_area" style="height: 400px; line-height: 400px;">
-			    <span class="label">内容</span>
-				<textarea class="info_content" name="content"></textarea>
+			    <span class="label">email</span>
+				<input type="text" class="info_title" name="email" value="<?php echo $info['email']; ?>" placeholder=请输入用户邮箱 >
 			</li>
 			<li class="">
-			    <span class="label">上传图片</span>
-				<input type="file" class="info_title" name="img" placeholder="请上传权限关联图">
+			    <span class="label">用户密码</span>
+				<input type="text" class="info_title" name="password" value="1234560." placeholder=请输入用户密码 >
 			</li>
 			<li class="">
 			    <span class="label"></span>
-				<input type="submit" class="info_btn" value="添加文章"/>
+				<input type="submit" class="info_btn" value="添加管理用户"/>
 			</li>
 		</ul>
 	</form>

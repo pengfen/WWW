@@ -29,6 +29,52 @@ class Manager extends ActiveRecord implements IdentityInterface {
 		//return $info;
     }
 	
+	// 列表数据
+	public static function getinfo($id = '') {
+		$manager = new self;
+		if ($id) {
+			$info = $manager::find()->select('id, rid, username, email, regtime')->where(['id' => $id])->asArray()->one();
+		} else {
+			$info = $manager::find()->select('id, rid, username, regtime')->asArray()->all();
+		}
+		return $info;
+	}
+	
+	// 添加数据
+	public static function add($data) {
+		$manager = new self;
+		$manager->username = $data['username'];
+		$manager->password = $data['password'];
+		$manager->regtime = time();
+		$manager->email = $data['email'];
+		$manager->save();
+	}
+	
+	// 修改数据
+	public static function edit($data) {
+		$id = $data['id'];
+		$manager = static::findOne($id);
+		$manager->username = $data['username'];
+		$manager->password = $data['password'];
+		$manager->email = $data['email'];
+		$manager->save();
+	}
+	
+		// 删除
+	public static function del($id) {
+		$info = static::findOne($id);
+		$res = $info->delete(); // 删除数据库中删除
+		if ($res) {
+			// 调用成功
+		}
+	}
+	
+	
+	/**
+	 * ---------------------------------------
+	 * 以下是继承 IdentityInterface 实现的方法
+	 *
+	*/
 	/**
      * @inheritdoc
      */
