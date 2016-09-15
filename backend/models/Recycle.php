@@ -1,0 +1,8 @@
+<?php
+
+namespace backend\models;
+
+// Í¼Æ¬»ØÊÕ
+class Recycle {
+	
+}

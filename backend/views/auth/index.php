@@ -52,12 +52,15 @@ use yii\widgets\LinkPager;
 		foreach($auth as $val) {
 			echo "<li class='info_content'>";
 			echo "<span class='number'>".$val['id']."</span>";
-			echo "<span class='author'>".$val['name']."</span>";
+			echo "<span class='author'><a href='/index.php?r=auth/detail&id=".$val['id']."'>".$val['name']."</a></span>";
 			echo "<span class='title'>".$val['controller']."</span>";
 			echo "<span class='title'>".$val['action']."</span>";
 			echo "<span class='date'>".$val['addtime']."</span>";
 			echo "<span class='oper'>";
-			echo "<a href='/index.php?r=auth/edit&id=".$val['id']."'>修改</a>";
+			echo "<a href='/index.php?r=auth/detail&id=".$val['id']."'>详情</a>&nbsp;";
+			echo "<a href='/index.php?r=auth/edit&id=".$val['id']."'>修改</a>&nbsp;";
+			echo "<a href='/index.php?r=auth/editimg&id=".$val['id']."'>修改关联图</a>&nbsp;";
+			echo "<a href='/index.php?r=auth/del&id=".$val['id']."'>删除</a>&nbsp;";
 			echo "</span>";
 			echo "</li>";
 		}
