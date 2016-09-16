@@ -15,14 +15,14 @@
 <?php 
 foreach($pinfo as $val) {
 	echo "<div class='menu_info'>";
-	echo "<h2>".$val['name']."</h2>";
+	echo "<h2><a href='/index.php?r=auth/detail&id=".$val['id']."'>".$val['name']."</a></h2>";
 	foreach($cinfo as $v) {
 		if ($v['pid'] == $val['id'] && $v['isShow'] == 0) {
 			$request = Yii::$app->request->getBaseUrl();
             echo "<span><a href='".$request."/index.php?r=".strtolower($v['controller'])."/".$v['action']."'>".$v['name']."</a></span>";
 		}
 	}
-	echo "<img src='".$val['image']."'/>";
+	echo "<a href='/index.php?r=auth/detail&id=".$val['id']."'><img src='".$val['image']."'/></a>";
 	echo "</div>";
 }
 ?>

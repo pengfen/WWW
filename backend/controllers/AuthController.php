@@ -9,6 +9,7 @@ use yii\data\Pagination;
 use backend\models\Auth;
 use backend\models\Upload;
 use backend\models\Recycle;
+use backend\models\Log;
 
 /**
  * 权限控制器 (权限列表 添加权限 修改权限 删除权限)
@@ -50,6 +51,7 @@ class AuthController extends Controller
      */
     public function actionIndex()
     {
+		Log::log("auth,action:index,权限列表"); // 记录日志
 		/* tp框架实现
 		$info = $this -> getinfo(true); // 获取所有权限信息
 		// 向模板中分配数据及显示模板
@@ -69,6 +71,7 @@ class AuthController extends Controller
 	*/
 	public function actionAdd()
 	{
+		Log::log("auth,action:add,权限列表单击添加权限"); // 记录日志
 		/* tp框架实现
 		$info = $this -> getinfo(); // 获取顶级,次顶级权限
 		$this -> assign('info', $info);
@@ -80,6 +83,7 @@ class AuthController extends Controller
 	}
 
 	public function actionInsert() {
+		Log::log("auth,action:add,添加权限界面单击添加权限"); // 记录日志
 		// 获取表单数据
 		$request = Yii::$app->request;
         $postData = $request->post();
@@ -133,6 +137,7 @@ class AuthController extends Controller
 	 */
 	public function actionEdit() 
 	{
+		Log::log("auth,action:add,权限列表单击修改"); // 记录日志
 		$request = Yii::$app->request->get();
 		$id = $request['id'];
 		$data = Auth::find()->select("id, pid, name, controller, action, addtime")->where(['id' => $id])->asArray()->one();
@@ -151,6 +156,7 @@ class AuthController extends Controller
 	*/
 	public function actionUpd()
 	{
+				Log::log("auth,action:add,修改权限界面单击修改权限"); // 记录日志
 		// 获取表单数据
 		$request = Yii::$app->request;
         $postData = $request->post();
@@ -187,6 +193,7 @@ class AuthController extends Controller
 	*/
 	public function actionEditimg()
 	{
+		Log::log("auth,action:add,权限列表单击修改关联图"); // 记录日志
 		$get = Yii::$app->request->get();
 		$id = $get['id'];
 		$info = Auth::findOne($id);
@@ -208,6 +215,7 @@ class AuthController extends Controller
 	*/
 	public function actionUpdimg()
 	{
+				Log::log("auth,action:add,修改关联图界面单击修改权限关联图"); // 记录日志
 		// 获取表单数据
 		$post = Yii::$app->request->post();
 
@@ -245,6 +253,7 @@ class AuthController extends Controller
 	*/
 	public function actionDetail()
 	{
+		Log::log("auth,action:add,权限列表单击详情"); // 记录日志
 		$get = Yii::$app->request->get();
 		$id = $get['id'];
 		$info = Auth::findOne($id);
@@ -265,6 +274,7 @@ class AuthController extends Controller
 	*/
 	public function actionDel()
 	{
+		Log::log("auth,action:add,权限列表单击删除"); // 记录日志
 		$get = Yii::$app->request->get();
 		$id = $get['id'];
 		$info = Auth::findOne($id);

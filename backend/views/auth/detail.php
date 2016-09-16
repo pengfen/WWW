@@ -2,7 +2,7 @@
     .info {
 		width: 90%; min-height: 800px; margin: 10px auto; background: #f2f2f2;
 	}
-	.info li {
+	.info li.detail {
 		height: 49px; margin: 5px;
 	}
 	.label {
@@ -27,16 +27,16 @@
 
 <div class="info">
 	    <ul>
-		    <li class="">
+		    <li class="detail">
 			    <span class="label">权限名</span>
 				<span><?php echo $info['name'];?></span>
 			</li>
 			<?php if ($info['controller'] != '') { ?>
-			<li class="">
+			<li class="detail">
 			    <span class="label">权限控制器</span>
 				<span><?php echo $info['controller'];?></span>
 			</li>
-			<li class="">
+			<li class="detail">
 			    <span class="label">权限操作方法</span>
 				<span><?php echo $info['action'];?></span>
 			</li>
