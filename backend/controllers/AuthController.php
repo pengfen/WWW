@@ -7,6 +7,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\data\Pagination;
 use backend\models\Auth;
+use backend\models\Manager;
 use backend\models\Upload;
 use backend\models\Recycle;
 use backend\models\Log;
@@ -257,6 +258,11 @@ class AuthController extends Controller
 		$get = Yii::$app->request->get();
 		$id = $get['id'];
 		$info = Auth::findOne($id);
+		$uid = $info['uid'];
+		$username = Manager::find()->select("display_name")->where(['id' => $uid])->asArray()->one();
+		if ($username) {
+			$info['uid'] = $username['display_name'];
+		}
 		return $this->render('detail', [
 		    'info' => $info,
 		]);

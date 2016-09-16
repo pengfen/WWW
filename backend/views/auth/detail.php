@@ -41,6 +41,14 @@
 				<span><?php echo $info['action'];?></span>
 			</li>
 			<?php } ?>
+			<li class="detail">
+			    <span class="label">添加人</span>
+				<span><?php echo $info['uid'];?></span>
+			</li>
+			<li class="detail">
+			    <span class="label">添加时间</span>
+				<span><?php echo date('Y-m-d H:i:s', $info['addtime']);?></span>
+			</li>
 			<?php if ($info['image'] != '') { ?>
 			<li class="">
 			    <span class="label">权限关联图</span>
