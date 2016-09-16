@@ -78,7 +78,7 @@ AppAsset::register($this);
             width: 1000px; height: 39px; margin: 10px auto;
         }
         .pagination li {
-            width: 39px; margin-right: 8px; height: 39px; line-height: 39px; background: #f3f3f3; text-align: center; float: left;
+            width: 39px; margin-right: 8px; height: 39px; line-height: 39px; background: #f3f3f3; text-align: center; float: left; cursor: pointer;
         }
     </style>
 </head>

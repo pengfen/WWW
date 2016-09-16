@@ -6,7 +6,7 @@ use yii\widgets\LinkPager;
 		width: 90%; margin: 10px auto; 
 	}
 	.info_add {
-		width: 100px; height: 39px; line-height: 39px; background: #f2f2f2; margin: 10px 0px; text-align: center; font-size 20px; font-weight: bold;
+		width: 100px; height: 39px; line-height: 39px; background: #f2f2f2; margin: 10px 0px; text-align: center; font-size 20px; font-weight: bold; cursor: pointer;
 	}
     .info_title {
 		height: 49px; line-height: 49px; background: #f3f3f3; font-size: 18px; font-weight: bold; 
@@ -49,13 +49,13 @@ use yii\widgets\LinkPager;
 			<span class="oper">操作</span>
 		</li>
 		<?php
-		foreach($auth as $val) {
+		foreach($auth as $key => $val) {
 			echo "<li class='info_content'>";
-			echo "<span class='number'>".$val['id']."</span>";
+			echo "<span class='number'>".($key + 1)."</span>";
 			echo "<span class='author'><a href='/index.php?r=auth/detail&id=".$val['id']."'>".$val['name']."</a></span>";
 			echo "<span class='title'>".$val['controller']."</span>";
 			echo "<span class='title'>".$val['action']."</span>";
-			echo "<span class='date'>".$val['addtime']."</span>";
+			echo "<span class='date'>".date('',$val['addtime'])."</span>";
 			echo "<span class='oper'>";
 			echo "<a href='/index.php?r=auth/detail&id=".$val['id']."'>详情</a>&nbsp;";
 			echo "<a href='/index.php?r=auth/edit&id=".$val['id']."'>修改</a>&nbsp;";

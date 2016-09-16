@@ -63,9 +63,9 @@ CREATE TABLE IF NOT EXISTS `resource_auth` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台权限表';
 
-INSERT INTO `data_auth` (`id`, `name`, `pid`, `controller`, `action`, `path`, `level`, `image`) VALUES
-(1, '权限管理', 0, '', '', '1', 0, ''),
-(2, '权限列表', 1, 'Auth', 'index', '1-2', 1, '');
+INSERT INTO `resource_auth` (`id`, `name`, `pid`, `controller`, `action`, `path`, `level`, `image`, `addtime`) VALUES
+(1, '权限管理', 0, '', '', '1', 0, '', unix_timestamp()),
+(2, '权限列表', 1, 'Auth', 'index', '1-2', 1, '', unix_timestamp());
 
 ALTER TABLE `resource_auth`
 ADD COLUMN `addtime` int unsigned DEFAULT 0 COMMENT '添加时间' AFTER `image`;
