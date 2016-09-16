@@ -8,36 +8,22 @@ use yii\filters\AccessControl;
 use backend\models\Technarticlecate;
 
 /**
- * Site controller
+ * 技术文章分类控制器
+ * 作者: caopeng
+ * 时间: 2016-09-16
  */
 class TechnarticlecateController extends Controller
 {
-    //public $layout = false;
 	/**
+	 * 使用自定义类做action前置过滤
+	 *
      * @inheritdoc
      */
     public function behaviors()
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error', 'index', 'add', 'insert'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
+                'class' => 'backend\filters\AccessFilter',
             ],
         ];
     }
@@ -55,34 +41,83 @@ class TechnarticlecateController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * 列表显示
      *
      * @return string
      */
     public function actionIndex()
     {
-		// 获取所有分类信息
-		$cate = Technarticlecate::getinfo();
-		return $this->render('index', [
-		    'cate' => $cate,
+		$info = Technarticlecate::getinfo('', true); // 获取所有权限信息
+		return $this->render('index',[
+		    'info' => $info['model'],
+		    'pages' => $info['pages'],
 		]);
     }
 	
-    /**
-     * 添加界面 
-     */
-    public function actionAdd()
-    {
-        $curl = curl_init("http://localhost:8080/data/wel");
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);			// 执行之后不直接打印出来
-        $con = curl_exec($curl);
-        curl_close($curl);
-		$res = json_decode($con);
-        var_dump($res);
-		exit;
-		/* tp
-        $info = $this -> getinfo(); // 获取顶级,次顶级权限
-        $this -> assign('info', $info);
-        $this -> display(); */
-    }
+	// 添加文章分类
+	public function actionAdd()
+	{
+		$post = Yii::$app->request->post();
+		$info = Technarticlecate::getinfo(); // 获取所有权限信息
+		if ($post) {
+			Technarticlecate::add($post, $_FILES);
+			return Yii::$app->getResponse()->redirect('/index.php?r=technarticlecate/index');
+		} else {
+			return $this->render('add', [
+			    'info' => $info['model'],
+			]);
+		}
+	}
+	
+	// 修改管理用户
+	public function actionEdit() {
+		$get = Yii::$app->request->get();
+		$id = $get['id'];
+		$data = Technarticlecate::getinfo($id);
+		$info = Technarticlecate::getinfo(); // 获取所有权限信息
+		$post = Yii::$app->request->post();
+		if ($post) {
+			Technarticlecate::edit($post);
+			return Yii::$app->getResponse()->redirect('/index.php?r=technarticlecate/index');
+		} else {
+			return $this->render('edit', [
+			    'info' => $info['model'],
+				'data' => $data,
+			]);
+		}
+	}
+	
+	// 修改分类关联图
+	public function actionEditimg() {
+		$get = Yii::$app->request->get();
+		$id = $get['id'];
+		$info = Technarticlecate::getinfo($id);
+		$post = Yii::$app->request->post();
+		if ($post) {
+			Technarticlecate::editimg($post, $_FILES);
+			return Yii::$app->getResponse()->redirect('/index.php?r=technarticlecate/index');
+		} else {
+			return $this->render('editimg', [
+			    'info' => $info,
+			]);
+		}
+	}
+	
+	// 删除用户
+	public function actionDel() {
+		$get = Yii::$app->request->get();
+		$id = $get['id'];
+		Technarticlecate::del($id);
+		// return Yii::$app->getResponse()->redirect('/index.php?r=technarticlecate/index');
+	}
+	
+	// 文章分类详情
+	public function actionDetail() {
+		$get = Yii::$app->request->get();
+		$id = $get['id'];
+		$info = Technarticlecate::getinfo($id);
+		return $this->render('detail', [
+		    'info' => $info,
+		]);
+	}
 }
