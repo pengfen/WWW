@@ -21,7 +21,7 @@
 		width: 1000px; height: 390px; padding-left: 8px; border-radius: 5px;
 	}
 	.info .info_btn {
-		width: 160px; height: 39px; line-height: 39px; font-size: 16px; font-weight: bold; background: red; border-radius: 6px;
+		width: 160px; height: 39px; line-height: 39px; font-size: 16px; font-weight: bold; background: red; border-radius: 6px; cursor: pointer;
 	}
 </style>
 
