@@ -39,14 +39,14 @@
 				    <?php
 					if ($info) {
 						foreach ($info as $val) {
-							echo "<option value='".$val['id']."'>".$val['name']."</option>";
+							echo "<option value='".$val['id']."'>".$val['catename']."</option>";
 						}
 					}
 				    ?>
 				</select>
 			</li>
 			<li class="">
-			    <span class="label">权限关联图</span>
+			    <span class="label">分类关联图</span>
 				<input type="file" class="info_title" name="img" value="" placeholder=请上传分类关联图 >
 			</li>
 			<li class="">
