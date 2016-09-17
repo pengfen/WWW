@@ -10,6 +10,7 @@ use backend\models\Technarticle;
 use backend\models\Upload;
 use backend\models\Manager;
 use backend\models\User;
+use backend\models\Log;
 
 /**
  * 技术文章控制器 (文章列表 添加文章 修改文章 文章详情)
@@ -51,7 +52,7 @@ class TechnarticleController extends Controller
     public function actionIndex()
     {
 		$article = Technarticle::find()->select('id, uid, title, addtime, state')->asArray()->all(); 
-		
+		Log::log("technarticle,action:index,文章列表"); // 记录日志
 		return $this->render('index', [
 		    'article'=>$article,
 		]);
@@ -62,6 +63,7 @@ class TechnarticleController extends Controller
 	public function actionAdd()
 	{
 		$info = Technarticlecate::getinfo('', true); // 获取所有权限信息
+		Log::log("technarticle,action:add,文章列表单击添加文章"); // 记录日志
 		return $this->render('add', [
 		    'info' => $info['model'],
 		]);
@@ -69,6 +71,7 @@ class TechnarticleController extends Controller
 	
 	// 添加技术文章内容
 	public function actionInsert() {
+		Log::log("technarticle,action:add,添加文章列表单击添加文章"); // 记录日志
 		// 获取表单数据
 		$request = Yii::$app->request;
         $postData = $request->post();
@@ -108,6 +111,7 @@ class TechnarticleController extends Controller
 
     // 查看详情
     public function actionDetail() {
+		Log::log("technarticle,action:detail,文章列表单击详情"); // 记录日志
 		$request = Yii::$app->request->get();
 		$id = $request['id'];
 		$info = Technarticle::find()->select("uid, title, addtime, content, img, state")->where(['id'=>$id])->asArray()->one();

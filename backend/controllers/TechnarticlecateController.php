@@ -6,6 +6,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\models\Technarticlecate;
+use backend\models\Log;
 
 /**
  * 技术文章分类控制器
