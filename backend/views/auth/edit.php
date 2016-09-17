@@ -57,6 +57,11 @@
 				<input type="text" class="info_title" name="action" value="<?php echo $data['action'];?>" placeholder=请输入权限操方法名 >
 			</li>
 			<li class="">
+			    <span class="label">是否显示</span>
+				<input type="radio" name="isShow" value="0" <?php if($data['isShow'] == 0) echo 'checked';?> >显示
+				<input type="radio" name="isShow" value="1" <?php if($data['isShow'] == 1) echo 'checked';?> >隐藏
+			</li>
+			<li class="">
 			    <span class="label">添加时间</span>
 				<span><?php echo date('Y-m-d H:i:s', $data['addtime']);?></span>
 			</li>

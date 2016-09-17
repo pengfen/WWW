@@ -50,7 +50,7 @@
 				echo "<span class='author'>".$val['rid']."</span>";
 				echo "<span class='date'>".date('Y-m-d H:i:s', $val['regtime'])."</span>";
 				echo "<span class='oper'>";
-				echo "<a href=‘/index.php?r=manager/edit&id=".$val['id']."'>修改</a>&nbsp;";
+				echo "<a href='/index.php?r=manager/edit&id=".$val['id']."'>修改</a>&nbsp;";
 				echo "<a href='/index.php?r=manager/detail&id=".$val['id']."'>详情</a>&nbsp;";
 				echo "<a href='/index.php?r=manager/del&id=".$val['id']."'>删除</a>&nbsp;";
 				echo "</span>";

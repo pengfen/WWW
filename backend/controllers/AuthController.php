@@ -141,7 +141,7 @@ class AuthController extends Controller
 		Log::log("auth,action:add,权限列表单击修改"); // 记录日志
 		$request = Yii::$app->request->get();
 		$id = $request['id'];
-		$data = Auth::find()->select("id, pid, name, controller, action, addtime")->where(['id' => $id])->asArray()->one();
+		$data = Auth::find()->select("id, pid, name, controller, action, isShow, addtime")->where(['id' => $id])->asArray()->one();
 		// find($id) 查询是总是第一条
 		// $data = Auth::find($id)->select("id, name, controller, action, addtime")->asArray()->one();
 		//$uidArr = (new Query())->select('uid')->from(self::UIBTB)->where('username = :username', [':username' => $username])->one();
@@ -157,7 +157,7 @@ class AuthController extends Controller
 	*/
 	public function actionUpd()
 	{
-				Log::log("auth,action:add,修改权限界面单击修改权限"); // 记录日志
+		Log::log("auth,action:add,修改权限界面单击修改权限"); // 记录日志
 		// 获取表单数据
 		$request = Yii::$app->request;
         $postData = $request->post();
@@ -170,6 +170,7 @@ class AuthController extends Controller
 		$auth->pid = $postData['pid'];
 		$auth->controller = $postData['controller'];
 		$auth->action = $postData['action'];
+		$auth->isShow = $postData['isShow'];
 		// 获取当前管理员 id
 		$manager = Yii::$app->session->get('manager');
 		$auth->mid = $manager['id'];

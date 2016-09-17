@@ -37,6 +37,17 @@
 				<input type="text" class="info_title" name="email" value="" placeholder=请输入用户邮箱 >
 			</li>
 			<li class="">
+			    <span class="label">角色</span>
+				<select class="info_pid" name="rid">
+				    <option value='0'>请选择角色</option>
+				    <?php
+				    foreach ($info as $val) {
+				    	echo "<option value='".$val['id']."'>".$val['name']."</option>";
+				    }
+				    ?>
+				</select>
+			</li>
+			<li class="">
 			    <span class="label">用户密码</span>
 				<input type="text" class="info_title" name="password" value="1234560." placeholder=请输入用户密码 >
 			</li>

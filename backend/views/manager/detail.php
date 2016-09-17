@@ -25,23 +25,20 @@
 <div class="info">
     <ul>
 	    <li>
-		    <span class="label">标题</span>
-			<span><?php echo $info['title'];?></span>
+		    <span class="label">用户名</span>
+			<span><?php echo $info['display_name'];?></span>
 		</li>
 		<li>
-		    <span class="label">作者</span>
-			<span><?php echo $info['username']?></span>
+		    <span class="label">角色</span>
+			<span><?php if ($info['rid'] == 0) { echo '未分配'; } else { echo $info['rid']; } ?></span>
 		</li>
 		<li>
 		    <span class="label">添加时间</span>
-			<span><?php echo date('Y-m-d H:i:s', $info['addtime']);?></span>
+			<span><?php echo date('Y-m-d H:i:s', $info['regtime']);?></span>
 		</li>
 		<li>
-		    <span class="label">内容</span>
-			<div><?php echo nl2br($info['content']);?></div>
-		</li>
-		<li>
-		    <img src="<?php echo $info['img']?>"/>
+		    <span class="label">email</span>
+			<span><?php echo nl2br($info['email']);?></span>
 		</li>
 	</ul>
 </div>

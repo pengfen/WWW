@@ -31,11 +31,32 @@ class Manager extends ActiveRecord implements IdentityInterface {
 	
 	// 列表数据
 	public static function getinfo($id = '') {
+		// 处理角色 (将角色拼成数组 id => name)
+		$info = Role::getinfo();
+		$role = [];
+		foreach ($info as $val) {
+			$role[$val['id']] = $val['name'];
+		}
+		
 		$manager = new self;
 		if ($id) {
-			$info = $manager::find()->select('id, rid, username, email, regtime')->where(['id' => $id])->asArray()->one();
+			$info = $manager::find()->select('id, rid, username, email, regtime, display_name')->where(['id' => $id])->asArray()->one();
+			//if ($role) $info['rid'] = $role[$info['rid']];
+			/*if ($role) {
+				foreach ($role as $val) {
+					if ($info['rid'] == $val['id']) {
+						$info['rid'] == $val['name'];
+						break;
+					}
+				}
+			}*/
 		} else {
 			$info = $manager::find()->select('id, rid, username, regtime')->asArray()->all();
+			if ($role) {
+				foreach ($info as $key => $val) {
+					$info[$key]['rid'] = $role[$val['rid']];
+				}
+			}
 		}
 		return $info;
 	}
@@ -45,6 +66,7 @@ class Manager extends ActiveRecord implements IdentityInterface {
 		$manager = new self;
 		$manager->username = $data['username'];
 		$manager->password = $data['password'];
+		$manager->rid = $data['rid'];
 		$manager->regtime = time();
 		$manager->email = $data['email'];
 		$manager->save();
@@ -55,7 +77,7 @@ class Manager extends ActiveRecord implements IdentityInterface {
 		$id = $data['id'];
 		$manager = static::findOne($id);
 		$manager->username = $data['username'];
-		$manager->password = $data['password'];
+		$manager->rid = $data['rid'];
 		$manager->email = $data['email'];
 		$manager->save();
 	}

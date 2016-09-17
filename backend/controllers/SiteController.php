@@ -83,7 +83,7 @@ class SiteController extends Controller
 		// 获取当前管理员 id
 		$manager = Yii::$app->session->get('manager');
 		$mid = $manager['id'];
-		\Yii::error("id:{$mid}进入首页", 'catalog');
+		//\Yii::error("id:{$mid}进入首页", 'catalog');
 		
 		// 查询顶级分类
 		$pinfo = Auth::find()->select('id, image, name, controller, action')->where(['pid' => 0, 'isShow' => 0])->asArray()->all();

@@ -27,19 +27,30 @@
 
 <div class="info">
     <form action="" method="post">
-	    <input type="hidden" name="id" value=<?php echo $info['id']; ?>/>
+	    <input type="hidden" name="id" value=<?php echo $data['id']; ?>/>
 	    <ul>
 		    <li class="">
 			    <span class="label">用户名</span>
-				<input type="text" class="info_title" name="username" value="<?php echo $info['username']; ?>" placeholder=请输入用户名 >
+				<input type="text" class="info_title" name="username" value="<?php echo $data['username']; ?>" placeholder=请输入用户名 >
 			</li>
 			<li class="">
 			    <span class="label">email</span>
-				<input type="text" class="info_title" name="email" value="<?php echo $info['email']; ?>" placeholder=请输入用户邮箱 >
+				<input type="text" class="info_title" name="email" value="<?php echo $data['email']; ?>" placeholder=请输入用户邮箱 >
 			</li>
 			<li class="">
-			    <span class="label">用户密码</span>
-				<input type="text" class="info_title" name="password" value="1234560." placeholder=请输入用户密码 >
+			    <span class="label">角色</span>
+				<select class="info_pid" name="rid">
+				    <option value='0'>请选择角色</option>
+				    <?php
+				    foreach ($info as $val) {
+						if ($data['rid'] == $val['id']) {
+							echo "<option value='".$val['id']."' selected >".$val['name']."</option>";
+						} else {
+							echo "<option value='".$val['id']."'>".$val['name']."</option>";
+						}
+				    }
+				    ?>
+				</select>
 			</li>
 			<li class="">
 			    <span class="label"></span>
