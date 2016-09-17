@@ -146,7 +146,8 @@ class Technarticlecate extends ActiveRecord {
 	  * $pid 权限父id
 	  * $id 记录id 
 	*/
-	private function getPath($pid, $id){
+	private function getPath($pid, $id) {
+		$cate = new self();
 		// path 父级全路径与本身id 的连接信息 如 1-3 (顶级权限则为id本身)
 		if ($pid == 0) {
 			$path = $id; // 顶级权限
@@ -154,8 +155,9 @@ class Technarticlecate extends ActiveRecord {
 			/* tp框架查找
 			$pinfo = $this -> find($pid);
 			$p_path = $pinfo['path']; */
-			$pinfo = Auth::find()->select('path')->where(['id' => $pid])->asArray()->one();
+			$pinfo = $cate::find()->select('path')->where(['id' => $pid])->asArray()->one();
 			$p_path = $pinfo['path'];
+
 			$path = $p_path.'-'.$id;
 		}
 		return $path;
