@@ -48,6 +48,7 @@ class TechnarticlecateController extends Controller
     public function actionIndex()
     {
 		$info = Technarticlecate::getinfo('', true); // 获取所有权限信息
+		Log::log("technarticlecate,action:index,文章技术分类列表"); // 记录日志
 		return $this->render('index',[
 		    'info' => $info['model'],
 		    'pages' => $info['pages'],
@@ -61,8 +62,10 @@ class TechnarticlecateController extends Controller
 		$info = Technarticlecate::getinfo(); // 获取所有权限信息
 		if ($post) {
 			Technarticlecate::add($post, $_FILES);
+			Log::log("technarticlecate,action:add,文章技术分类列表单击添加文章分类"); // 记录日志
 			return Yii::$app->getResponse()->redirect('/index.php?r=technarticlecate/index');
 		} else {
+			Log::log("technarticlecate,action:add,添加文章分类界面单击添加文章分类"); // 记录日志
 			return $this->render('add', [
 			    'info' => $info['model'],
 			]);
@@ -77,9 +80,11 @@ class TechnarticlecateController extends Controller
 		$info = Technarticlecate::getinfo(); // 获取所有权限信息
 		$post = Yii::$app->request->post();
 		if ($post) {
+			Log::log("technarticlecate,action:add,文章分类界面单击修改"); // 记录日志
 			Technarticlecate::edit($post);
 			return Yii::$app->getResponse()->redirect('/index.php?r=technarticlecate/index');
 		} else {
+			Log::log("technarticlecate,action:add,修改分类界面单击修改文章分类"); // 记录日志
 			return $this->render('edit', [
 			    'info' => $info['model'],
 				'data' => $data,
@@ -94,9 +99,11 @@ class TechnarticlecateController extends Controller
 		$info = Technarticlecate::getinfo($id);
 		$post = Yii::$app->request->post();
 		if ($post) {
+			Log::log("technarticlecate,action:editimg,文章分类界面单击修改关联图"); // 记录日志
 			Technarticlecate::editimg($post, $_FILES);
 			return Yii::$app->getResponse()->redirect('/index.php?r=technarticlecate/index');
 		} else {
+			Log::log("technarticlecate,action:editimg,修改关联图界面单击修改关联图"); // 记录日志
 			return $this->render('editimg', [
 			    'info' => $info,
 			]);
@@ -107,6 +114,7 @@ class TechnarticlecateController extends Controller
 	public function actionDel() {
 		$get = Yii::$app->request->get();
 		$id = $get['id'];
+		Log::log("technarticlecate,action:del,文章分类界面单击删除"); // 记录日志
 		Technarticlecate::del($id);
 		// return Yii::$app->getResponse()->redirect('/index.php?r=technarticlecate/index');
 	}
@@ -116,6 +124,7 @@ class TechnarticlecateController extends Controller
 		$get = Yii::$app->request->get();
 		$id = $get['id'];
 		$info = Technarticlecate::getinfo($id);
+		Log::log("technarticlecate,action:detail,文章分类界面单击详情"); // 记录日志
 		return $this->render('detail', [
 		    'info' => $info,
 		]);
