@@ -50,7 +50,7 @@ use yii\widgets\LinkPager;
 			echo "<span class='author'><a href='/index.php?r=technarticlecate/detail&id=".$val['id']."'>".$val['catename']."</a></span>";
 			echo "<span class='title'></span>";
 			echo "<span class='title'></span>";
-			echo "<span class='date'>".$val['addtime']."</span>";
+			echo "<span class='date'>".date('Y-m-d H:i:s', $val['addtime'])."</span>";
 			echo "<span class='oper'>";
 			echo "<a href='/index.php?r=technarticlecate/detail&id=".$val['id']."'>详情</a>&nbsp;";
 			echo "<a href='/index.php?r=technarticlecate/edit&id=".$val['id']."'>修改</a>&nbsp;";
