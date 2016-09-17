@@ -42,6 +42,11 @@
 			    <span class="label">所属分类</span>
 				<select class="info_pid" name="pid">
 				    <option value='0'>请选择所属分类</option>
+					<?php
+					foreach ($info as $val) {
+						echo "<option value='".$val['id']."'>".$val['catename']."</option>";
+					}
+					?>
 				</select>
 			</li>
 			<li class="content_area" style="height: 400px; line-height: 400px;">

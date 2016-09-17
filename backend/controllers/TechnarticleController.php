@@ -5,42 +5,29 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use backend\models\Technarticlecate;
 use backend\models\Technarticle;
 use backend\models\Upload;
 use backend\models\Manager;
 use backend\models\User;
 
 /**
- * Site controller
+ * 技术文章控制器 (文章列表 添加文章 修改文章 文章详情)
+ * 作者: caopeng
+ * 时间: 2016-09-17
  */
 class TechnarticleController extends Controller
 {
-    //public $layout = false;
 	/**
+	 * 使用自定义类做action前置过滤
+	 *
      * @inheritdoc
      */
     public function behaviors()
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error','index','add','insert', 'detail'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
+                'class' => 'backend\filters\AccessFilter',
             ],
         ];
     }
@@ -56,9 +43,8 @@ class TechnarticleController extends Controller
             ],
         ];
     }
-
     /**
-     * Displays homepage.
+     * 文章列表
      *
      * @return string
      */
@@ -75,8 +61,10 @@ class TechnarticleController extends Controller
 	// 添加技术文章
 	public function actionAdd()
 	{
-		return $this->render('add');
-		
+		$info = Technarticlecate::getinfo('', true); // 获取所有权限信息
+		return $this->render('add', [
+		    'info' => $info['model'],
+		]);
 	}
 	
 	// 添加技术文章内容
@@ -88,6 +76,7 @@ class TechnarticleController extends Controller
 		// 实例化数据表
 		$Technarticle = new Technarticle();
 		$Technarticle->title = $postData['title'];
+		$Technarticle->pid = $postData['pid'];
 		// 内容使用 htmlspecialchars 过滤 页面显示使用nl2br反过滤
 		$Technarticle->content = htmlspecialchars($postData['content'], ENT_QUOTES);
         // 后台管理员添加
