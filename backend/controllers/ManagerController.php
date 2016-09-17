@@ -134,11 +134,11 @@ class ManagerController extends Controller
 		$data = Manager::getinfo($id);
 		$post = Yii::$app->request->post();
 		if ($post) {
-			Log::log("auth,action:add,修改管理员界面单击修改管理员"); // 记录日志
+			Log::log("auth,action:edit,修改管理员界面单击修改管理员"); // 记录日志
 			Manager::edit($post);
 			return Yii::$app->getResponse()->redirect('/index.php?r=manager/index');
 		} else {
-			Log::log("auth,action:add,管理员列表单击修改管理员"); // 记录日志
+			Log::log("auth,action:edit,管理员列表单击修改管理员"); // 记录日志
 			$info = Role::getinfo();
 			return $this->render('edit', [
 			    'info' => $info,
@@ -171,7 +171,7 @@ class ManagerController extends Controller
 	
 	// 删除用户
 	public function actionDel() {
-		Log::log("auth,action:add,管理员列表单击删除"); // 记录日志
+		Log::log("auth,action:del,管理员列表单击删除"); // 记录日志
 		$get = Yii::$app->request->get();
 		$id = $get['id'];
 		Manager::del($id);
@@ -190,7 +190,7 @@ class ManagerController extends Controller
 	
 	// 管理员详情
 	public function actionDetail() {
-		Log::log("auth,action:add,管理员列表单击详情"); // 记录日志
+		Log::log("auth,action:detail,管理员列表单击详情"); // 记录日志
 		$get = Yii::$app->request->get();
 		$id = $get['id'];
 		$info = Manager::getinfo($id);

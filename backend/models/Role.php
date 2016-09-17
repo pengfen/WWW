@@ -26,6 +26,9 @@ class Role extends ActiveRecord {
 	public static function add($data) {
 		$manager = new self;
 		$manager->name = $data['name'];
+		// 获取当前管理员 id
+		$manager = Yii::$app->session->get('manager');
+		$auth->uid = $manager['id'];
 		$manager->addtime = time();
 		$manager->save();
 	}

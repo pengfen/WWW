@@ -138,7 +138,7 @@ class AuthController extends Controller
 	 */
 	public function actionEdit() 
 	{
-		Log::log("auth,action:add,权限列表单击修改"); // 记录日志
+		Log::log("auth,action:edit,权限列表单击修改"); // 记录日志
 		$request = Yii::$app->request->get();
 		$id = $request['id'];
 		$data = Auth::find()->select("id, pid, name, controller, action, isShow, addtime")->where(['id' => $id])->asArray()->one();
@@ -157,7 +157,7 @@ class AuthController extends Controller
 	*/
 	public function actionUpd()
 	{
-		Log::log("auth,action:add,修改权限界面单击修改权限"); // 记录日志
+		Log::log("auth,action:edit,修改权限界面单击修改权限"); // 记录日志
 		// 获取表单数据
 		$request = Yii::$app->request;
         $postData = $request->post();
@@ -195,7 +195,7 @@ class AuthController extends Controller
 	*/
 	public function actionEditimg()
 	{
-		Log::log("auth,action:add,权限列表单击修改关联图"); // 记录日志
+		Log::log("auth,action:editimg,权限列表单击修改关联图"); // 记录日志
 		$get = Yii::$app->request->get();
 		$id = $get['id'];
 		$info = Auth::findOne($id);
@@ -217,7 +217,7 @@ class AuthController extends Controller
 	*/
 	public function actionUpdimg()
 	{
-				Log::log("auth,action:add,修改关联图界面单击修改权限关联图"); // 记录日志
+				Log::log("auth,action:editimg,修改关联图界面单击修改权限关联图"); // 记录日志
 		// 获取表单数据
 		$post = Yii::$app->request->post();
 
@@ -255,7 +255,7 @@ class AuthController extends Controller
 	*/
 	public function actionDetail()
 	{
-		Log::log("auth,action:add,权限列表单击详情"); // 记录日志
+		Log::log("auth,action:detail,权限列表单击详情"); // 记录日志
 		$get = Yii::$app->request->get();
 		$id = $get['id'];
 		$info = Auth::findOne($id);
@@ -281,7 +281,7 @@ class AuthController extends Controller
 	*/
 	public function actionDel()
 	{
-		Log::log("auth,action:add,权限列表单击删除"); // 记录日志
+		Log::log("auth,action:del,权限列表单击删除"); // 记录日志
 		$get = Yii::$app->request->get();
 		$id = $get['id'];
 		$info = Auth::findOne($id);
