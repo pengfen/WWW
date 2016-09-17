@@ -225,6 +225,8 @@ class AuthController extends Controller
 		//$auth = new Auth();
 		$id = $post['id'];
 		$auth = Auth::findOne($id);
+		// 可以使用 $auth->image, $auth['image']
+		$data['image'] = $auth->image; // 获取图片地址
 		
 		// 获取当前管理员 id
 		$manager = Yii::$app->session->get('manager');
@@ -238,6 +240,8 @@ class AuthController extends Controller
 			$info = Upload::upload($files, $dir, $newdir, 2000000, array('image/png', 'image/gif', 'image/jpeg'));
 			//判断是否上传成功
 			if ($info['success']){
+				// 图片回收
+			    Recycle::add($data);
 				$auth->image = $info['info'];
 				$auth->save();
 				return Yii::$app->getResponse()->redirect('/index.php?r=auth/index');

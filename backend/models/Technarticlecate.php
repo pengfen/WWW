@@ -66,6 +66,9 @@ class Technarticlecate extends ActiveRecord {
 	public static function editimg($data, $file) {
 		$id = $data['id'];
 		$cate = static::findOne($id);
+		// 可以使用 $auth->image, $auth['image']
+		$data['image'] = $cate->image; // 获取图片地址
+		
 		if (!empty($file)) {
 			$newdir = 'upload/'.date('Y-m-d', time()).'/';
 			$dir = Yii::$app->basePath.'/web/'.$newdir;
@@ -75,6 +78,8 @@ class Technarticlecate extends ActiveRecord {
 			if ($info['success']){
 				$cate->img = $info['info'];
 				$cate->save();
+				// 图片回收
+			    Recycle::add($data);
 			}
 		}
 	}
