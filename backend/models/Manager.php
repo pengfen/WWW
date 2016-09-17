@@ -54,7 +54,10 @@ class Manager extends ActiveRecord implements IdentityInterface {
 			$info = $manager::find()->select('id, rid, username, regtime')->asArray()->all();
 			if ($role) {
 				foreach ($info as $key => $val) {
-					$info[$key]['rid'] = $role[$val['rid']];
+					// 判断下标 排除下标为0
+					if (array_key_exists($val['rid'], $role)) {
+						$info[$key]['rid'] = $role[$val['rid']];
+					}
 				}
 			}
 		}
