@@ -1,11 +1,14 @@
 安装 yii-xunsearch 插件 (composer安装)
-从以前项目复制  vendor/highman --- vendor/
+cmd --- 进入项目目录 (注意 vendor/composer 目录下添加了一些配置文件)
+composer require --prefer-dist hightman/xunsearch "*@beta"
 
 配置插件
 common/config/main.php
 'xunsearch' => [
     'class' => 'hightman\xunsearch\Connection',
-    'iniDirectory' => '@api/config',
+    // 搜索 ini 文件目录  默认@vendor/hightman/xunsearch/app
+    'iniDirectory' => '@common/config',
+    // 指定项目使用的默认编码 默认即是 utf-8 可不指定
     'charset' => 'utf-8',
 ],
 
@@ -40,3 +43,10 @@ class Se_auth extends \hightman\zunsearch\ActiveRecord
 }
 
 测试连接
+// 测试
+public function actionIndex()
+{
+	$model = new Se_auth();
+	var_dump($model);
+	exit;
+}

@@ -138,7 +138,8 @@ class ManagerController extends Controller
 			Manager::edit($post);
 			return Yii::$app->getResponse()->redirect('/index.php?r=manager/index');
 		} else {
-			Log::log("auth,action:edit,管理员列表单击修改管理员"); // 记录日志
+			Log::log("auth,action
+			:edit,管理员列表单击修改管理员"); // 记录日志
 			$info = Role::getinfo();
 			return $this->render('edit', [
 			    'info' => $info,
@@ -177,8 +178,8 @@ class ManagerController extends Controller
 		Manager::del($id);
 		return Yii::$app->getResponse()->redirect('/index.php?r=manager/index');
 	}
-	/**
-	// 删除管理员
+
+	/** 删除管理员
 	public function delete(){
 		$manager = D('Manager');
 		$id = I('get.id');
@@ -204,8 +205,7 @@ class ManagerController extends Controller
 		]);
 	}
 	
-	/**
-	//添加时验证邮箱
+	/**添加时验证邮箱
 	public function checkEmail(){
 		//$model = D('Manager');
 		//接收jequery.post传过来的数据

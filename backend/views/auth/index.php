@@ -5,8 +5,8 @@ use yii\widgets\LinkPager;
     .info {
 		width: 90%; margin: 10px auto; 
 	}
-	.info_add {
-		width: 100px; height: 39px; line-height: 39px; background: #f2f2f2; margin: 10px 0px; text-align: center; font-size 20px; font-weight: bold; cursor: pointer;
+	.info_add a{
+		width: 100px; height: 39px; line-height: 39px; background: #f2f2f2; margin: 10px 0px; text-align: center; font-size 20px; font-weight: bold; display: inline-block; cursor: pointer;
 	}
     .info_title {
 		height: 49px; line-height: 49px; background: #f3f3f3; font-size: 18px; font-weight: bold; 
@@ -38,6 +38,7 @@ use yii\widgets\LinkPager;
 		?>
 	
 		<!-- <a href="/index.php?r=auth/add">添加权限</a> -->
+		<a href="/index.php?r=auth/search">按权限名搜索</a>
 	</div>
 	<ul>
 		<li class="info_title">

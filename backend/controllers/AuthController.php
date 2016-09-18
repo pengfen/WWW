@@ -203,8 +203,7 @@ class AuthController extends Controller
 		    'info' => $info,
 		]);
 	}
-	/**
-	 * tp框架实现
+	/** tp框架实现
 	public function editImg(){
 		$id = I('get.id');
 		$info = D('Auth') -> find($id);
@@ -367,5 +366,12 @@ class AuthController extends Controller
 			$path = $p_path.'-'.$id;
 		}
 		return $path;
+	}
+
+	/**
+	 * 按文件名搜索
+	*/
+	public function actionSearch() {
+		return $this->render('search');
 	}
 }

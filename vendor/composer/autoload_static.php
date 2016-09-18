@@ -23,6 +23,10 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
         ),
+        'h' => 
+        array (
+            'hightman\\xunsearch\\' => 19,
+        ),
         'c' => 
         array (
             'cebe\\markdown\\' => 14,
@@ -66,6 +70,10 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
         ),
+        'hightman\\xunsearch\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hightman/xunsearch/wrapper/yii2-ext',
+        ),
         'cebe\\markdown\\' => 
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
@@ -93,12 +101,35 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         ),
     );
 
+    public static $classMap = array (
+        'EXunSearch' => __DIR__ . '/..' . '/hightman/xunsearch/wrapper/yii-ext/EXunSearch.php',
+        'XS' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XS.class.php',
+        'XSCommand' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSServer.class.php',
+        'XSComponent' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XS.class.php',
+        'XSDocument' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSDocument.class.php',
+        'XSErrorException' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XS.class.php',
+        'XSException' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XS.class.php',
+        'XSFieldMeta' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSFieldScheme.class.php',
+        'XSFieldScheme' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSFieldScheme.class.php',
+        'XSIndex' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSIndex.class.php',
+        'XSSearch' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSSearch.class.php',
+        'XSServer' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSServer.class.php',
+        'XSTokenizer' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSTokenizer.class.php',
+        'XSTokenizerFull' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSTokenizer.class.php',
+        'XSTokenizerNone' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSTokenizer.class.php',
+        'XSTokenizerScws' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSTokenizer.class.php',
+        'XSTokenizerSplit' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSTokenizer.class.php',
+        'XSTokenizerXlen' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSTokenizer.class.php',
+        'XSTokenizerXstep' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSTokenizer.class.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863::$classMap;
 
         }, null, ClassLoader::class);
     }
