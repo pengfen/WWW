@@ -45,6 +45,10 @@ ADD COLUMN `updatetime` int unsigned DEFAULT 0 COMMENT '修改时间';
 ALTER TABLE `resource_role`
 ADD COLUMN `mid` int unsigned DEFAULT 0 COMMENT '修改人';
 
+-- 测试时对数据清零
+DELETE FROM `resource_role`;
+TRUNCATE resource_role;
+
 -- 权限表
 CREATE TABLE IF NOT EXISTS `resource_auth` (
   `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
