@@ -12,28 +12,22 @@
         width: 100%; height: auto;
     }
 </style>
-<div class="menu_info">
-    <h2>权限管理</h2>
-    <?php
-    foreach ($auth as $val) {
-        $request = Yii::$app->request->getBaseUrl();
-        echo "<span><a href='".$request."/index.php?r=".strtolower($val['controller'])."/".$val['action']."'>".$val['name']."</a></span>";
-    }
-    ?>
-    <img src="../images/bg.png"/>
-</div>
+<?php 
+foreach($pinfo as $val) {
+	echo "<div class='menu_info'>";
+	echo "<h2><a href='/index.php?r=auth/detail&id=".$val['id']."'>".$val['name']."</a></h2>";
+	foreach($cinfo as $v) {
+		if ($v['pid'] == $val['id'] && $v['isShow'] == 0) {
+			$request = Yii::$app->request->getBaseUrl();
+            echo "<span><a href='".$request."/index.php?r=".strtolower($v['controller'])."/".$v['action']."'>".$v['name']."</a></span>";
+		}
+	}
+	echo "<a href='/index.php?r=auth/detail&id=".$val['id']."'><img src='".$val['image']."'/></a>";
+	echo "</div>";
+}
+?>
 
-<div class="menu_info">
-    <h2>资料管理</h2>
-    <?php
-    foreach ($source as $val) {
-        $request = Yii::$app->request->getBaseUrl();
-        echo "<span><a href='".$request."/index.php?r=".strtolower($val['controller'])."/".$val['action']."'>".$val['name']."</a></span>";
-    }
-    ?>
-    <img src="../images/bg.png"/>
-</div>
-
+<!--
 <div class="menu_info">
     <h2>统计报表</h2>
     <span>权限列表</span><span>权限列表</span>
@@ -76,3 +70,4 @@
     <span>权限列表</span><span>权限列表</span>
     <img src="../images/bg.png"/>
 </div>
+-->

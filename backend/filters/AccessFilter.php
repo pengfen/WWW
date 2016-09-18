@@ -5,23 +5,23 @@ use Yii;
 use yii\base\ActionFilter;
 
 /**
- * ²Ù×÷·½·¨Ç°×º¹ýÂË
- * ¹¦ÄÜ: À¹½ØÈ¨ÏÞ
- * ×÷Õß: caopeng
- * Ê±¼ä: 2016-09-11
+ * æ“ä½œæ–¹æ³•å‰ç¼€è¿‡æ»¤
+ * åŠŸèƒ½: æ‹¦æˆªæƒé™
+ * ä½œè€…: caopeng
+ * æ—¶é—´: 2016-09-11
 */
 class AccessFilter extends ActionFilter {
 	
 	public function beforeAction($action) {
-		$method = $action->id; // »ñÈ¡²Ù×÷·½·¨Ãû
-		$controller = $action->controller->id; // »ñÈ¡¿ØÖÆÆ÷Ãû
-		if ($method != 'login') { // ÅÅ³ýµÇÂ¼
-			// »ñÈ¡µ±Ç°µÄÇëÇó Èç\Manager\index --- CONTROLLER_NAME ---> Manager ACTION_NAME ---> index
+		$method = $action->id; // èŽ·å–æ“ä½œæ–¹æ³•å
+		$controller = $action->controller->id; // èŽ·å–æŽ§åˆ¶å™¨å
+		if ($method != 'login') { // æŽ’é™¤ç™»å½•
+			// èŽ·å–å½“å‰çš„è¯·æ±‚ å¦‚\Manager\index --- CONTROLLER_NAME ---> Manager ACTION_NAME ---> index
 			$now_ac = $controller.'-'.$method;
 			
 			$manager = Yii::$app->session->get('manager');
 			if ($manager) {
-				// »ñÈ¡ËùÒÔÈ¨ÏÞ
+				// èŽ·å–æ‰€ä»¥æƒé™
 				$id = $manager['id'];
 				$prefix = Yii::$app->db->tablePrefix;
 				$sql = "select aac from ".$prefix."manager a left join ".$prefix."role b on a.rid = b.id where a.id='{$id}'";
@@ -29,7 +29,7 @@ class AccessFilter extends ActionFilter {
 				$aac = $data[0];
 				$allow_ac = array('Index-index');
 
-				// ÅÐ¶ÏÈ¨ÏÞ
+				// åˆ¤æ–­æƒé™
 				if (!in_array($now_ac, $allow_ac) && $id != 1 && strpos($aac, $now_ac) === false) {
 					return Yii::$app->getResponse()->redirect('/index.php?r=site/login');
 				}
@@ -41,30 +41,30 @@ class AccessFilter extends ActionFilter {
 		return parent::beforeAction($action);
 	}
 	
-	/** tp ¿ò¼ÜÊµÏÖÈ¨ÏÞ¿ØÖÆ (Ê¹ÓÃ»ùÀà£¬È»ºóËùÓÐ¿ØÖÆÆ÷¼Ì³Ð»ùÀà)
-	  * ¿ØÖÆÆ÷»ùÀà 
-	  * ¹¦ÄÜ: À¹½ØÈ¨ÏÞ
-	  * ×÷Õß: apeng
-	  * Ê±¼ä: 2015-07-31
+	/** tp æ¡†æž¶å®žçŽ°æƒé™æŽ§åˆ¶ (ä½¿ç”¨åŸºç±»ï¼Œç„¶åŽæ‰€æœ‰æŽ§åˆ¶å™¨ç»§æ‰¿åŸºç±»)
+	  * æŽ§åˆ¶å™¨åŸºç±» 
+	  * åŠŸèƒ½: æ‹¦æˆªæƒé™
+	  * ä½œè€…: apeng
+	  * æ—¶é—´: 2015-07-31
 	  
 	class BaseController extends Controller{
 		function __construct(){
 			parent::__construct();
 
-			// »ñÈ¡µ±Ç°µÄÇëÇó Èç\Manager\index --- CONTROLLER_NAME ---> Manager ACTION_NAME ---> index
+			// èŽ·å–å½“å‰çš„è¯·æ±‚ å¦‚\Manager\index --- CONTROLLER_NAME ---> Manager ACTION_NAME ---> index
 			$now_ac = CONTROLLER_NAME.'-'.ACTION_NAME;
 			//dump($now_ac);
-			// »ñÈ¡µ±Ç°½ÇÉ«ËùÓµÓÐµÄËùÓÐÈ¨ÏÞ
+			// èŽ·å–å½“å‰è§’è‰²æ‰€æ‹¥æœ‰çš„æ‰€æœ‰æƒé™
 			$id = $_SESSION['manager']['id'];
 			if ($id) {
 				$sql = "select aac from resource_manager a left join resource_role b on a.rid = b.id where a.id='{$id}'";
 				$aac = D() -> query($sql);
 				$allow_ac = array('Index-index');
 				if (!in_array($now_ac, $allow_ac) && $_SESSION['manager']['id'] != 1 && strpos($aac, $now_ac) === false) {
-					$this -> error('ÄãÃ»ÓÐÈ¨ÏÞ·ÃÎÊ', U('Login/login'));
+					$this -> error('ä½ æ²¡æœ‰æƒé™è®¿é—®', U('Login/login'));
 				}
 			} else {
-				//$this -> error('ÄãÃ»ÓÐÈ¨ÏÞ·ÃÎÊ', U('Login/login'));
+				//$this -> error('ä½ æ²¡æœ‰æƒé™è®¿é—®', U('Login/login'));
 				$this -> redirect('Login/login');
 			}
 		}

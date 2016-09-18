@@ -48,9 +48,10 @@
 				$request = Yii::$app->request->getBaseUrl();
 				echo "<li class='info_content'>";
 				echo "<span class='number'>".$val['id']."</span>";
-				echo "<span class='author'>".$val['uid']."</span>";
+				//echo "<span class='author'>".$val['uid']."</span>";
+				echo "<span class='author'>后台管理员</span>";
 				echo "<span class='author'>".$val['title']."</span>";
-				echo "<span class='date'>".$val['addtime']."</span>";
+				echo "<span class='date'>".date('Y-m-d H:i:s', $val['addtime'])."</span>";
 				echo "<span class='oper'>";
 				echo "<a href='".$request."/index.php?r=technarticle/detail&id=".$val['id']."'>详情</a>";
 				echo "</span>";

@@ -5,42 +5,30 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use backend\models\Technarticlecate;
 use backend\models\Technarticle;
 use backend\models\Upload;
 use backend\models\Manager;
 use backend\models\User;
+use backend\models\Log;
 
 /**
- * Site controller
+ * 技术文章控制器 (文章列表 添加文章 修改文章 文章详情)
+ * 作者: caopeng
+ * 时间: 2016-09-17
  */
 class TechnarticleController extends Controller
 {
-    //public $layout = false;
 	/**
+	 * 使用自定义类做action前置过滤
+	 *
      * @inheritdoc
      */
     public function behaviors()
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error','index','add','insert', 'detail'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
+                'class' => 'backend\filters\AccessFilter',
             ],
         ];
     }
@@ -56,16 +44,15 @@ class TechnarticleController extends Controller
             ],
         ];
     }
-
     /**
-     * Displays homepage.
+     * 文章列表
      *
      * @return string
      */
     public function actionIndex()
     {
 		$article = Technarticle::find()->select('id, uid, title, addtime, state')->asArray()->all(); 
-		
+		Log::log("technarticle,action:index,文章列表"); // 记录日志
 		return $this->render('index', [
 		    'article'=>$article,
 		]);
@@ -75,12 +62,16 @@ class TechnarticleController extends Controller
 	// 添加技术文章
 	public function actionAdd()
 	{
-		return $this->render('add');
-		
+		$info = Technarticlecate::getinfo('', true); // 获取所有权限信息
+		Log::log("technarticle,action:add,文章列表单击添加文章"); // 记录日志
+		return $this->render('add', [
+		    'info' => $info['model'],
+		]);
 	}
 	
 	// 添加技术文章内容
 	public function actionInsert() {
+		Log::log("technarticle,action:add,添加文章列表单击添加文章"); // 记录日志
 		// 获取表单数据
 		$request = Yii::$app->request;
         $postData = $request->post();
@@ -88,6 +79,7 @@ class TechnarticleController extends Controller
 		// 实例化数据表
 		$Technarticle = new Technarticle();
 		$Technarticle->title = $postData['title'];
+		$Technarticle->pid = $postData['pid'];
 		// 内容使用 htmlspecialchars 过滤 页面显示使用nl2br反过滤
 		$Technarticle->content = htmlspecialchars($postData['content'], ENT_QUOTES);
         // 后台管理员添加
@@ -119,6 +111,7 @@ class TechnarticleController extends Controller
 
     // 查看详情
     public function actionDetail() {
+		Log::log("technarticle,action:detail,文章列表单击详情"); // 记录日志
 		$request = Yii::$app->request->get();
 		$id = $request['id'];
 		$info = Technarticle::find()->select("uid, title, addtime, content, img, state")->where(['id'=>$id])->asArray()->one();

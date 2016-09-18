@@ -24,14 +24,82 @@ class Manager extends ActiveRecord implements IdentityInterface {
     public static function findByUsername($username)
     {
         //return static::findOne(['username' => $username, 'state' => self::STATUS_ACTIVE]);
-		$cate = new self;
-		$info = $cate::find()
-			->select('id,password')
-			->where(['username' => $username])
-			->asArray()->one();
-		return $info;
+		$manager = new self;
+		return $manager::find()->select('id,password')->where(['username' => $username])->asArray()->one();
+		//return $info;
     }
 	
+	// 列表数据
+	public static function getinfo($id = '') {
+		// 处理角色 (将角色拼成数组 id => name)
+		$info = Role::getinfo();
+		$role = [];
+		foreach ($info as $val) {
+			$role[$val['id']] = $val['name'];
+		}
+		
+		$manager = new self;
+		if ($id) {
+			$info = $manager::find()->select('id, rid, username, email, regtime, display_name')->where(['id' => $id])->asArray()->one();
+			//if ($role) $info['rid'] = $role[$info['rid']];
+			/*if ($role) {
+				foreach ($role as $val) {
+					if ($info['rid'] == $val['id']) {
+						$info['rid'] == $val['name'];
+						break;
+					}
+				}
+			}*/
+		} else {
+			$info = $manager::find()->select('id, rid, username, regtime')->asArray()->all();
+			if ($role) {
+				foreach ($info as $key => $val) {
+					// 判断下标 排除下标为0
+					if (array_key_exists($val['rid'], $role)) {
+						$info[$key]['rid'] = $role[$val['rid']];
+					}
+				}
+			}
+		}
+		return $info;
+	}
+	
+	// 添加数据
+	public static function add($data) {
+		$manager = new self;
+		$manager->username = $data['username'];
+		$manager->password = $data['password'];
+		$manager->rid = $data['rid'];
+		$manager->regtime = time();
+		$manager->email = $data['email'];
+		$manager->save();
+	}
+	
+	// 修改数据
+	public static function edit($data) {
+		$id = $data['id'];
+		$manager = static::findOne($id);
+		$manager->username = $data['username'];
+		$manager->rid = $data['rid'];
+		$manager->email = $data['email'];
+		$manager->save();
+	}
+	
+		// 删除
+	public static function del($id) {
+		$info = static::findOne($id);
+		$res = $info->delete(); // 删除数据库中删除
+		if ($res) {
+			// 调用成功
+		}
+	}
+	
+	
+	/**
+	 * ---------------------------------------
+	 * 以下是继承 IdentityInterface 实现的方法
+	 *
+	*/
 	/**
      * @inheritdoc
      */

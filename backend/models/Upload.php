@@ -2,7 +2,7 @@
 
 namespace backend\models;
 
-// 上传文件
+// 上传文件 2016-09-15
 class Upload {
 
 	/**

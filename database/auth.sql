@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `resource_manager` (
   `regtime` int(10) unsigned DEFAULT 0 COMMENT '注册时间',
   `logtime` int(10) unsigned DEFAULT 0 COMMENT '登录时间',
   `email` varchar(30) DEFAULT NULL COMMENT '邮箱',
+  `display_name` varchar(30) NOT NULL DEFAULT '' COMMENT '显示名',
   `rid` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '角色id',
   `flag` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否在职 0离职 1在职',
   `state` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态 0无效 1有效',
@@ -21,7 +22,9 @@ INSERT INTO `resource_manager` (`id`, `username`, `password`, `regtime`, `logtim
 ALTER TABLE `resource_manager`
 ADD COLUMN `flag` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否在职 0离职 1在职' AFTER `rid`;
 ALTER TABLE `resource_manager` 
-ADD COLUMN  `state` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态 0无效 1有效';
+ADD COLUMN `state` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态 0无效 1有效';
+ALTER TABLE `resource_manager` 
+ADD COLUMN `display_name` varchar(30) NOT NULL DEFAULT '' COMMENT '显示名';
 
 -- 角色表
 CREATE TABLE IF NOT EXISTS `resource_role` (
@@ -67,9 +70,9 @@ CREATE TABLE IF NOT EXISTS `resource_auth` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='后台权限表';
 
-INSERT INTO `data_auth` (`id`, `name`, `pid`, `controller`, `action`, `path`, `level`, `image`) VALUES
-(1, '权限管理', 0, '', '', '1', 0, ''),
-(2, '权限列表', 1, 'Auth', 'index', '1-2', 1, '');
+INSERT INTO `resource_auth` (`id`, `name`, `pid`, `controller`, `action`, `path`, `level`, `image`, `addtime`, `uid`) VALUES
+(1, '权限管理', 0, '', '', '1', 0, '', unix_timestamp(), 1),
+(2, '权限列表', 1, 'Auth', 'index', '1-2', 1, '', unix_timestamp(), 1);
 
 ALTER TABLE `resource_auth`
 ADD COLUMN `addtime` int unsigned DEFAULT 0 COMMENT '添加时间' AFTER `image`;

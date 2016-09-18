@@ -36,12 +36,17 @@
 	    <ul>
 		    <li class="">
 			    <span class="label">标题</span>
-				<input type="text" class="info_title" name="title" vlaue="" placeholder=请输入标题 >
+				<input type="text" class="info_title" name="title" value="" placeholder=请输入标题 >
 			</li>
 			<li class="">
 			    <span class="label">所属分类</span>
 				<select class="info_pid" name="pid">
 				    <option value='0'>请选择所属分类</option>
+					<?php
+					foreach ($info as $val) {
+						echo "<option value='".$val['id']."'>".$val['catename']."</option>";
+					}
+					?>
 				</select>
 			</li>
 			<li class="content_area" style="height: 400px; line-height: 400px;">

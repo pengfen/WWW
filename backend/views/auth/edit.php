@@ -21,7 +21,7 @@
 		width: 1000px; height: 390px; padding-left: 8px; border-radius: 5px;
 	}
 	.info .info_btn {
-		width: 160px; height: 39px; line-height: 39px; font-size: 16px; font-weight: bold; background: red; border-radius: 6px;
+		width: 160px; height: 39px; line-height: 39px; font-size: 16px; font-weight: bold; background: red; border-radius: 6px; cursor: pointer;
 	}
 </style>
 
@@ -55,6 +55,11 @@
 			<li class="">
 			    <span class="label">权限操作方法</span>
 				<input type="text" class="info_title" name="action" value="<?php echo $data['action'];?>" placeholder=请输入权限操方法名 >
+			</li>
+			<li class="">
+			    <span class="label">是否显示</span>
+				<input type="radio" name="isShow" value="0" <?php if($data['isShow'] == 0) echo 'checked';?> >显示
+				<input type="radio" name="isShow" value="1" <?php if($data['isShow'] == 1) echo 'checked';?> >隐藏
 			</li>
 			<li class="">
 			    <span class="label">添加时间</span>
