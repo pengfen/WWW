@@ -41,7 +41,7 @@ class AntController extends Controller
 	
 	// 支付宝理财列表
 	public function actionPay() {
-		$info = Pay::find()->select('id,uid,amount,readdtime,total_revenue')->asArray()->all(); 
+		$info = Pay::find()->select('id,uid,amount,addtime,total_revenue')->asArray()->all(); 
 		Log::log("ant,action:pay,支付宝理财列表"); // 记录日志
 		return $this->render('pay', [
 		    'info' => $info,
