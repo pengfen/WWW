@@ -38,7 +38,7 @@
 		</li>
 		<li class="detail">
 			<span class="label">添加时间</span>
-			<span><?=date('Y-m-d H:i:s', $info['amount']);?></span>
+			<span><?=date('Y-m-d H:i:s', $info['addtime']);?></span>
 		</li>
 		<li class="detail">
 			<span class="label">所属者</span>
