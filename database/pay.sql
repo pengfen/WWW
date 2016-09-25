@@ -21,27 +21,35 @@ CREATE TABLE `resource_gold` (
 	`addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
 	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id',
 	`hold_gold` decimal(15,4) NOT NULL DEFAULT '0.0' COMMENT '持有黄金',
-	`type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '类型 0 加仓 1 减仓',
-	`money` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '加减仓金额',
+	`type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '类型 0 买入 1 卖出',
+	`money` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '买入卖出金额',
 	`cost_price` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '成本',
 	`current_price` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '现价',
 	`note` varchar(255) NOT NULL DEFAULT '' COMMENT '说明',
 	`total_revenue` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '总收益'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='黄金收益表';
 
--- 指基收益表
-CREATE TABLE `resource_gold` (
+-- 指基表
+CREATE TABLE `resource_index_fund` (
     `id` int unsigned NOT NULL AUTO_INCREMENT primary key,
-	`amount` decimal(15,2) NOT NULL '0.0' COMMENT '总金额',
-	`revenue` decimal(15,2) NOT NULL '0.0' COMMENT '收益',
+	`name` varchar(50) NOT NULL DEFAULT '' COMMENT '指基名',
+	`amount` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '总金额',
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='指基表';
+
+-- 指基收益表
+CREATE TABLE `resource_index_fund_revneue` (
+    `id` int unsigned NOT NULL AUTO_INCREMENT primary key,
+	`fid` varchar(50) NOT NULL DEFAULT '' COMMENT '指数基金 ID',
+	`amount` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '总金额',
+	`revenue` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '收益',
 	`addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
 	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id',
-	`hold_gold` decimal(15,4) NOT NULL '0.0' COMMENT '持有黄金',
-	`type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '类型 0 加仓 1 减仓',
-	`money` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '加减仓金额',
+	`hold_lot` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '持有份额',
+	`type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '类型 0 买入 1 卖出',
+	`money` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '买入卖出金额',
 	`note` varchar(255) NOT NULL DEFAULT '' COMMENT '说明',
 	`total_revenue` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '总收益'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='黄金收益表';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='指数基金收益表';
 
 -- p2p收益表
 CREATE TABLE `resource_p2p` (
