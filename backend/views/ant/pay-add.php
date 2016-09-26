@@ -27,6 +27,7 @@
 
 <div class="info">
     <form action="" method="post">
+	    <input type="hidden" name="flag" value="1">
 	    <ul>
 		    <li class="">
 			    <span class="label">总金额</span>
@@ -36,6 +37,22 @@
 			    <span class="label">今日收益</span>
 				<input type="text" class="info_title" name="revenue" value="" placeholder=请输入今日收益 >
 			</li>
+			
+			<!--
+			<li class="">
+			    <span class="label">权限关联图</span>
+				<input type="file" class="info_title" name="img" value="" placeholder=请上传权限关联图 >
+			</li>
+			-->
+			<li class="">
+			    <span class="label"></span>
+				<input type="submit" class="info_btn" value="添加支付宝收益"/>
+			</li>
+		</ul>
+	</form>
+	<form action="" method="post">
+	    <input type="hidden" name="flag" value="2">
+	    <ul>
 			<li class="">
 			    <span class="label">类型(转入转出)</span>
 				<input type="radio" name="type" value="0" checked> 转入
@@ -58,7 +75,7 @@
 			-->
 			<li class="">
 			    <span class="label"></span>
-				<input type="submit" class="info_btn" value="添加支付宝收益"/>
+				<input type="submit" class="info_btn" value="添加支转入转出金额"/>
 			</li>
 		</ul>
 	</form>

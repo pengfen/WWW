@@ -7,7 +7,7 @@ CREATE TABLE `resource_pay` (
 	`revenue` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '收益',
 	`addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
 	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id',
-	`type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '类型 0 转入 1 转出',
+	`type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '类型 0 转入 1 转出 3非转入转出',
 	`money` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '转入转出金额',
 	`note` varchar(255) NOT NULL DEFAULT '' COMMENT '说明',
 	`total_revenue` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '总收益'
