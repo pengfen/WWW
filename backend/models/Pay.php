@@ -49,15 +49,12 @@ class Pay extends ActiveRecord {
 		} else {
 			$pay->type = $data['type'];
 			$money = $data['money']?$data['money']:0;
-			echo $data['type'];
-			echo 'money : '.$money;
 			// 0 转入 1 转出
 			if ($data['type'] == 1) {
 				$pay->amount = $amount - $money;
 			} else {
 				$pay->amount = $amount + $money;
 			}
-			echo $pay->amount;
 			$pay->money = $money;
 			$pay->note = $data['note'];
 			// 处理总收益
