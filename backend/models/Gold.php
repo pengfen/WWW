@@ -15,7 +15,7 @@ class Gold extends ActiveRecord {
 	// 校验规则
 	public function rules() {
 		return [
-		    ['revenue', 'required', 'message'=>'昨日收益不能为空'],
+		    //['revenue', 'required', 'message'=>'昨日收益不能为空'],
 		];
 	}
 	
@@ -32,31 +32,42 @@ class Gold extends ActiveRecord {
 			$total = $info['total_revenue'];
 		}
 		
-		$revenue = $data['revenue'];
-		$money = $data['money']?$data['money']:0;
+		// 处理添加收益
+		if (isset($data['flag']) && $data['flag'] == 1) {
+			$revenue = $data['revenue'];
+			// 处理总金额
+			if ($data['amount']) {
+				$gold->amount = $data['amount'];
+			} else {
+				$gold->amount = $amount + $revenue;
+			}
+			$gold->note = "黄金收益";
+			$gold->revenue = $revenue;
+			// 处理总收益
+		    $gold->total_revenue = $total + $revenue;
+			$gold->current_price = $data['current_price'];
 		
-		// 处理总金额
-		if ($data['amount']) {
-			$gold->amount = $data['amount'];
+			// 计算黄金持有克数 总价/现价 保留四位小数
+			$gold->hold_gold = round($gold->amount / $data['current_price'], 4);
 		} else {
-			$gold->amount = $amount + $money + $revenue;
+			$gold->type = $data['type'];
+			$money = $data['money']?$data['money']:0;
+			// 0 转入 1 转出
+			if ($data['type'] == 1) {
+				$gold->amount = $amount - $money;
+			} else {
+				$gold->amount = $amount + $money;
+			}
+			$gold->money = $money;
+			$gold->note = $data['note'];
+			// 处理总收益
+		    $gold->total_revenue = $total;
 		}
 		
-		$gold->revenue = $revenue;
-		$gold->money = $money;
 		$gold->addtime = time();
 		// 获取当前管理员 id
 		$manager = Yii::$app->session->get('manager');
 		$gold->uid = $manager['id'];
-		$gold->type = $data['type'];
-		$gold->note = $data['note'];
-		$gold->current_price = $data['current_price'];
-		
-		// 计算黄金持有克数 总价/现价 保留四位小数
-		$gold->hold_gold = round($gold->amount / $data['current_price'], 4);
-		
-		// 处理总收益
-		$gold->total_revenue = $total + $revenue;
 		
 		return $gold->save();
 	}

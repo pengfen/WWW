@@ -34,7 +34,7 @@ class Pay extends ActiveRecord {
 		}
 		
 		// 处理添加收益
-		if ($data['flag'] == 1) {
+		if (isset($data['flag']) && $data['flag'] == 1) {
 			$revenue = $data['revenue'];
 			// 处理总金额
 			if ($data['amount']) {

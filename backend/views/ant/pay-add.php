@@ -51,7 +51,6 @@
 		</ul>
 	</form>
 	<form action="" method="post">
-	    <input type="hidden" name="flag" value="2">
 	    <ul>
 			<li class="">
 			    <span class="label">类型(转入转出)</span>
@@ -75,7 +74,7 @@
 			-->
 			<li class="">
 			    <span class="label"></span>
-				<input type="submit" class="info_btn" value="添加支转入转出金额"/>
+				<input type="submit" class="info_btn" value="添加转入转出金额"/>
 			</li>
 		</ul>
 	</form>

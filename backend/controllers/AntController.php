@@ -42,7 +42,7 @@ class AntController extends Controller
 	
 	// 支付宝理财列表
 	public function actionPay() {
-		$info = Pay::find()->select('id,uid,amount,addtime,total_revenue')->asArray()->all(); 
+		$info = Pay::find()->select('id,uid,amount,addtime,total_revenue')->orderBy(['id' => SORT_DESC])->asArray()->all(); 
 		Log::log("ant,action:pay,支付宝理财列表"); // 记录日志
 		return $this->render('pay', [
 		    'info' => $info,
@@ -74,7 +74,7 @@ class AntController extends Controller
 	
 	// 黄金(存金宝)收益列表
 	public function actionGold() {
-		$info = Gold::find()->select('id,uid,amount,addtime,total_revenue')->asArray()->all(); 
+		$info = Gold::find()->select('id,uid,amount,addtime,total_revenue')->orderBy(['id' => SORT_DESC])->asArray()->all(); 
 		Log::log("ant,action:gold,黄金收益列表"); // 记录日志
 		return $this->render('gold', [
 		    'info' => $info,
