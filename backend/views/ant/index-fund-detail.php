@@ -28,6 +28,10 @@
 <div class="info">
     <h2>指数收益操作详情</h2>
 	<ul>
+	    <li class="detail">
+			<span class="label">指基名</span>
+			<span><?php if($info['name']) echo $info['name']; else echo '统计基金';?></span>
+		</li>
 		<li class="detail">
 			<span class="label">总金额</span>
 			<span><?=$info['amount']?></span>

@@ -54,7 +54,7 @@
 			-->
 			<li class="">
 			    <span class="label"></span>
-				<input type="submit" class="info_btn" value="添加支付宝收益"/>
+				<input type="submit" class="info_btn" value="添加指数基金收益"/>
 			</li>
 		</ul>
 	</form>
