@@ -6,6 +6,7 @@ use yii\web\Controller;
 use backend\models\Log;
 use backend\models\Pay;
 use backend\models\Gold;
+use backend\models\Fund;
 
 /**
  * 蚂蚁聚宝理财 (支付宝理财列表)
@@ -100,6 +101,38 @@ class AntController extends Controller
 		$id = $get['id'];
 		$info = Gold::find()->where(['id' => $id])->asArray()->one();
 		return $this->render('gold-detail', [
+		    'info' => $info,
+		]);
+	}
+	
+	// 指数基金列表
+	public function actionIndexFund() {
+		$info = Fund::find()->select('id,amount,revenue,addtime,total_revenue')->orderBy(['id' => SORT_DESC])->asArray()->all(); 
+		Log::log("ant,action:index-fund,指数基金列表"); // 记录日志
+		return $this->render('index-fund', [
+		    'info' => $info,
+		]);
+	}
+	
+	// 添加指数基金
+	public function actionIndexFundAdd() {
+		$data = Yii::$app->request->post();
+		if ($data) {
+			Log::log("ant,action:index-fund-add,添加收益界面单击添加收益按钮"); // 记录日志
+			Fund::add($data);
+		} else {
+			Log::log("ant,action:index-fund-add,指基收益列表单击添加收益按钮"); // 记录日志
+		}
+		return $this->render('index-fund-add');
+	}
+	
+	// 指基收益详情
+	public function actionIndexFundDetail() {
+		Log::log("ant,action:index-fund-detail,指基收益列表单击详情"); // 记录日志
+		$get = Yii::$app->request->get();
+		$id = $get['id'];
+		$info = Fund::find()->where(['id' => $id])->asArray()->one();
+		return $this->render('index-fund-detail', [
 		    'info' => $info,
 		]);
 	}

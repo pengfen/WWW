@@ -33,7 +33,11 @@ CREATE TABLE `resource_gold` (
 CREATE TABLE `resource_index_fund` (
     `id` int unsigned NOT NULL AUTO_INCREMENT primary key,
 	`name` varchar(50) NOT NULL DEFAULT '' COMMENT '指基名',
+	`revenue` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '收益',
 	`amount` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '总金额',
+	`total_revenue` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '总收益',
+	`addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
+	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='指基表';
 
 -- 指基收益表
@@ -43,7 +47,6 @@ CREATE TABLE `resource_index_fund_revneue` (
 	`amount` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '总金额',
 	`revenue` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '收益',
 	`addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
-	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id',
 	`hold_lot` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '持有份额',
 	`type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '类型 0 买入 1 卖出',
 	`money` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '买入卖出金额',
