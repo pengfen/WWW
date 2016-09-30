@@ -70,17 +70,36 @@ CREATE TABLE `resource_p2p` (
 	`note` varchar(255) NOT NULL DEFAULT '' COMMENT '说明'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='P2P收益表';
 
--- 股票账号表
+-- 股票账号收益表
 CREATE TABLE `resource_share_account` (
     `id` int unsigned NOT NULL AUTO_INCREMENT primary key,
-	`sid` varchar(255) NOT NULL DEFAULT '' COMMENT '股票收益表id',
 	`amount` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '总资产',
-	`total_marker_value` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '总市值',
+	`total_market_value` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '总市值',
 	`float_pl` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '浮动盈亏',
 	`daily_pl` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '当日盈亏',
+	`advisable` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '可用',
+	`available` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '可取',
+	`total_revenue` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '总收益',
+	`type` tinyint(1) unsigned NOT NULL DEFAULT 3 COMMENT '类型 0 转入 1 转出 3非转入转出',
+	`money` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '转入转出金额',
 	`addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
-	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id',
+	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='股票账号表';
+
+-- 股票表
+CREATE TABLE `resource_share` (
+    `id` int unsigned NOT NULL AUTO_INCREMENT primary key,
+	`marker_value` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '市值',
+	`name` varchar(20) NOT NULL DEFAULT '0.0' COMMENT '股票名',
+	`share_code` char(6) NOT NULL DEFAULT '' COMMENT '股票代码',
+	`daily_pl` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '盈亏',
+	`type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '类型 0 加仓 1 减仓',
+	`money` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '加减仓金额',
+    `addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
+	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id',
+	`cost_price` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '成本',
+	`current_price` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '现价',
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='股票收益表';
 
 -- 股票收益表
 CREATE TABLE `resource_share` (
