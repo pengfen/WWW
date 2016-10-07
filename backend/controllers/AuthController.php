@@ -11,6 +11,7 @@ use backend\models\Manager;
 use backend\models\Upload;
 use backend\models\Recycle;
 use backend\models\Log;
+use backend\models\UserBase;
 
 /**
  * 权限控制器 (权限列表 添加权限 修改权限 删除权限)
@@ -66,6 +67,128 @@ class AuthController extends Controller
 		    'pages' => $info['pages'],
 		]);
     }
+	
+	// 权限组列表
+	public function actionTest()
+	{
+		$this->layout = false;
+		$data = Yii::$app->request->post();
+		$msg = '';
+
+		if ($data) {
+			// 处理搜索 (按权限组名查询)
+			if (isset($data['state'])) {
+				// 页面操作(启用禁用,删除) 使用ajax异步
+				$state = $data['state'];
+				if ($state == 1) { // 添加权限组
+					echo PermissionGroup::add($data);
+				} elseif ($state == 2) { // 执行删除
+					echo PermissionGroup::del($data);
+				} elseif ($state == 3) { // 执行修改是否有效
+					echo PermissionGroup::edit($data);
+				}
+				exit;
+			} else { // 根据权限组名查询
+				$name = $data['search'];
+				if ($name) {
+					// 获取权限组信息
+		            $info = PermissionGroup::getInfo($name, 1);
+				} else {
+					$msg = '权限组名不能为空';
+				}
+			}
+
+		} 
+
+		if (!isset($info)) {
+			// 获取权限组信息
+		    //$info = PermissionGroup::getInfo();
+			$info[0]['id'] = 1;
+			$info[0]['rule_name'] = '主管';
+			$info[0]['note'] = '所有主管信息';
+			$info[0]['used_flg'] = '1';
+		}
+
+		return $this->renderPartial('test', [
+			'info' => $info,
+			'message' => $msg,
+		]);
+	}
+	
+		// 成员授权
+	public function actionUser()
+	{
+	    $data = Yii::$app->request->post();
+	    if ($data) {
+	    	// 根据id获取权限组信息
+	    	if ($data['state'] == 1) {
+
+	    		$id = $data['id'];
+				// 权限组信息
+				// $auth = PermissionGroup::getInfo($id, 2);
+				// if ($auth) {
+				// 	$auth = $auth[0];
+				// }
+				
+				$auth['rule_name'] = '主管';
+			    $auth['note'] = '所有主管信息';
+			    $auth['used_flg'] = '1';
+				
+				echo json_encode($auth);
+				exit;
+	    	} elseif ($data['state'] == 2) {
+				echo 'hjkhjk';
+				exit;
+	    		//$id = $data['id'];
+	    		//$userAuth = $this->getAuth($id);
+				$userAuth = '';
+				// 获取所有用户信息
+				$user = UserBase::getInfo($userAuth);
+				// $user = UserBase::getOrganInfo($userAuth);
+				// 获取组织名
+		        //$user['organ_name'] = UserBase::getOrgan();
+				echo json_encode($user);
+				exit;
+	    	} elseif ($data['state'] == 3) {
+	    		$id = $data['id'];
+	    		$userAuth = $this->getAuth($id);
+	    		$oid = $data['oid'].',DC=gdzt039,DC=com';
+	    		$user = UserBase::getOrganInfo($userAuth, $oid);
+	    		$user['organ_name'] = UserBase::getOrgan();
+	    		echo json_encode($user);
+	    		exit;
+	    	} elseif ($data['state'] == 4) {
+	    		echo UserPermissionGroup::add($data);
+	    	}
+	    	exit;
+	    } else {
+			$userAuth = '';
+		    // 获取所有用户信息
+		    $user = UserBase::getInfo($userAuth);
+	    	echo '你的请求地址不对';
+	    }
+		// 获取已授权用户id
+		// $userAuth = UserPermissionGroup::getInfo($id);
+		// if ($userAuth) {
+		// 	$userAuth = $userAuth[0];
+		// }
+		// // 获取所有用户信息
+		// $user = UserBase::getInfo($userAuth);
+		// // 获取组织名
+		// $organ = UserBase::getOrgan();
+
+		// if ($auth) {
+		// 	$auth = $auth[0];
+		// 	return $this->renderPartial('user', [
+		// 		'auth' => $auth,
+		// 		'user' => $user,
+		// 		'organ' => $organ,
+		// 	]);
+		// } else {
+		// 	// 跳转到权限列表页
+		// 	return Yii::$app->getResponse()->redirect('/index.php?r=auth/index');
+		// }
+	}
 	
 	/**
 	 * 添加界面

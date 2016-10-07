@@ -4,12 +4,15 @@ namespace backend\models;
 use Yii;
 use yii\db\ActiveRecord;
 
-// 支付宝收益表 2016-09-24
-class Account extends ActiveRecord {
+// 股票 2016-10-07
+class Shares extends ActiveRecord {
+	
+	const ACCOUNT = '{{%share_account}}'; // 股票账号收益表
+	const REVENUE = '{{%share_revenue}}'; // 股票平台收益表
 	
 	// 定义对应的表名
 	public static function tableName() {
-		return '{{%share_account}}';
+		return '{{%share}}';
 	}
 	
 	// 校验规则
@@ -19,7 +22,7 @@ class Account extends ActiveRecord {
 		];
 	}
 	
-	// 添加股票数据
+    // 添加股票数据
 	public function add($data) {
 		$share = new self;
 		
@@ -38,7 +41,7 @@ class Account extends ActiveRecord {
 		// 
 	}
 	
-	// 添加股票账号收益
+	// 添加数据
 	public function addAccount($data) {
 		$account = new self;
 		

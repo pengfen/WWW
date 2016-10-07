@@ -3,10 +3,7 @@
 		width: 90%; margin: 10px auto; 
 	}
 	.info_add {
-		height: 39px; line-height: 39px; text-align: center; font-size 20px; font-weight: bold; margin-bottom: 20px;
-	}
-	.info_add a {
-		padding: 0px 8px; background: #f2f2f2; margin: 10px 10px 10px 0px; float: left;
+		width: 100px; height: 39px; line-height: 39px; background: #f2f2f2; margin: 10px 0px; text-align: center; font-size 20px; font-weight: bold;
 	}
     .info_title {
 		height: 49px; line-height: 49px; background: #f3f3f3; font-size: 18px; font-weight: bold; 
@@ -33,7 +30,6 @@
 <div class="info">
     <div class="info_add">
 		<a href="/index.php?r=shares/account-add">添加股票账号收益</a>
-		<a href="/index.php?r=shares/share">股票列表</a>
 	</div>
 	<ul>
 		<li class="info_title">

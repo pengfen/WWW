@@ -3,13 +3,17 @@ namespace backend\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\db\Query;
 
-// 支付宝收益表 2016-09-24
-class Account extends ActiveRecord {
+// p2p收益 2016-10-03
+class P2p extends ActiveRecord {
+	
+	const ACCOUNT = '{{%p2p_account}}'; // p2p账号收益表
+	const REVENUE = '{{%php_revenue}}'; // p2p平台收益表
 	
 	// 定义对应的表名
 	public static function tableName() {
-		return '{{%share_account}}';
+		return '{{%p2p}}';
 	}
 	
 	// 校验规则
@@ -19,27 +23,15 @@ class Account extends ActiveRecord {
 		];
 	}
 	
-	// 添加股票数据
+	// 获取账号收益表信息
+	public function getAccount() {
+		$query = new Query();
+		$data = $query->select('id,total_revenue,addtime,uid,amount')->from(self::ACCOUNT)->all();
+		return $data;
+	}
+	
+	// 添加数据
 	public function add($data) {
-		$share = new self;
-		
-		// 处理添加股票数据
-		$share->name = $data['name'];
-		$share->share_code = $data['share_code'];
-		$share->addtime = time();
-		// 获取当前管理员 id
-		$manager = Yii::$app->session->get('manager');
-		$share->uid = $manager['id'];
-		return $share->save();
-	}
-	
-	// 添加股票收益
-	public function addRevenue($data) {
-		// 
-	}
-	
-	// 添加股票账号收益
-	public function addAccount($data) {
 		$account = new self;
 		
 		// 处理添加收益

@@ -3,10 +3,7 @@
 		width: 90%; margin: 10px auto; 
 	}
 	.info_add {
-		height: 39px; line-height: 39px; text-align: center; font-size 20px; font-weight: bold; margin-bottom: 20px;
-	}
-	.info_add a {
-		padding: 0px 8px; background: #f2f2f2; margin: 10px 10px 10px 0px; float: left;
+		width: 100px; height: 39px; line-height: 39px; background: #f2f2f2; margin: 10px 0px; text-align: center; font-size 20px; font-weight: bold;
 	}
     .info_title {
 		height: 49px; line-height: 49px; background: #f3f3f3; font-size: 18px; font-weight: bold; 
@@ -32,24 +29,23 @@
 </style>
 <div class="info">
     <div class="info_add">
-		<a href="/index.php?r=shares/account-add">添加股票账号收益</a>
-		<a href="/index.php?r=shares/share">股票列表</a>
+		<a href="/index.php?r=shares/share-add">添加股票</a>
 	</div>
 	<ul>
 		<li class="info_title">
 			<span class="number">编号</span>
 			<span class="author">作者</span>
-			<span class="title">总金额</span>
-			<span class="date">日期</span>
-			<span class="oper">总收益</span>
+			<span class="title">股票名称</span>
+			<span class="date">股票代码</span>
+			<span class="oper">日期</span>
 		</li>
 		<?php foreach($info as $key => $val) {?> 
 		<li class="info_content">
 			<span class="number"><?=($key + 1);?></span>
 		    <span class="author"><?=$val['uid']?></span>
-			<span class="title"><a href="/index.php?r=shares/account-detail&id=<?=$val['id']?>"><?=$val['amount']?></a></span>
-			<span class="date"><?=date('Y-m-d H:i:s', $val['addtime']);?></span>
-			<span class="oper"><?=$val['total_revenue']?></span>
+			<span class="title"><a href='/index.php?r=shares/share-detail&id=<?=$val["id"]?>'><?=$val['name']?></a></span>
+			<span class="date"><?=$val['share_code']?></span>
+			<span class="oper"><?=date('Y-m-d H:i:s', $val['addtime']);?></span>
 		</li>
 		<?php } ?>
 		<!--
