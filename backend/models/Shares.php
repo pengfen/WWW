@@ -3,6 +3,7 @@ namespace backend\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\db\Query;
 
 // 股票 2016-10-07
 class Shares extends ActiveRecord {
@@ -22,6 +23,13 @@ class Shares extends ActiveRecord {
 		];
 	}
 	
+	// 获取收益列表数据
+	public function getRevenue() {
+		$query = new Query();
+		$data = $query->select("id,market_value,daily_pl")->from(self::REVENUE)->all();
+		return $data;
+	}
+	
     // 添加股票数据
 	public function add($data) {
 		$share = new self;
@@ -38,7 +46,9 @@ class Shares extends ActiveRecord {
 	
 	// 添加股票收益
 	public function addRevenue($data) {
-		// 
+		$revenue = self::REVENUE;
+		$revenue->market_value = $data['market_value'];
+		return $revenue->save();
 	}
 	
 	// 添加数据

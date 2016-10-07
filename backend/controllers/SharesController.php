@@ -104,4 +104,40 @@ class SharesController extends Controller
 		]);
 	}
 	
+	// 支付宝理财列表
+	public function actionRevenue() {
+		$info = Shares::getRevenue();
+		//$info = Shares::find()->select('id,uid,name,share_code,addtime')->orderBy(['id' => SORT_DESC])->asArray()->all(); 
+		Log::log("shares,action:share,股票账号列表"); // 记录日志
+		return $this->render('revenue', [
+		    'info' => $info,
+		]);
+	}
+	
+	// 添加支付宝收益
+	public function actionRevenueAdd() {
+		$info = Shares::find('id,name')->asArray()->all();
+		$data = Yii::$app->request->post();
+		if ($data) {
+			Log::log("shares,action:revenue-add,添加收益界面单击添加收益按钮"); // 记录日志
+			Shares::addRevenue($data);
+		} else {
+			Log::log("shares,action:revenue-add,股票账号列表单击添加收益按钮"); // 记录日志
+		}
+		return $this->render('revenue-add', [
+		    'info' => $info,
+		]);
+	}
+	
+	// 支付宝收益详情
+	public function actionRevenueDetail() {
+		Log::log("shares,action:revenue-detail,股票账号列表单击详情"); // 记录日志
+		$get = Yii::$app->request->get();
+		$id = $get['id'];
+		$info = Shares::find()->where(['id' => $id])->asArray()->one();
+		return $this->render('revenue-detail', [
+		    'info' => $info,
+		]);
+	}
+	
 }

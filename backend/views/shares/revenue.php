@@ -32,25 +32,23 @@
 </style>
 <div class="info">
     <div class="info_add">
-		<a href="/index.php?r=shares/account-add">添加股票账号收益</a>
-		<a href="/index.php?r=shares/share">股票列表</a>
-		<a href="/index.php?r=shares/revenue">股票收益列表</a>
+		<a href="/index.php?r=shares/revenue-add">添加股票收益</a>
 	</div>
 	<ul>
 		<li class="info_title">
 			<span class="number">编号</span>
 			<span class="author">作者</span>
-			<span class="title">总金额</span>
+			<span class="title">市值</span>
 			<span class="date">日期</span>
-			<span class="oper">总收益</span>
+			<span class="oper">盈亏</span>
 		</li>
 		<?php foreach($info as $key => $val) {?> 
 		<li class="info_content">
 			<span class="number"><?=($key + 1);?></span>
 		    <span class="author"><?=$val['uid']?></span>
-			<span class="title"><a href="/index.php?r=shares/account-detail&id=<?=$val['id']?>"><?=$val['amount']?></a></span>
+			<span class="title"><a href="/index.php?r=shares/revenue-detail&id=<?=$val['id']?>"><?=$val['market_value']?></a></span>
 			<span class="date"><?=date('Y-m-d H:i:s', $val['addtime']);?></span>
-			<span class="oper"><?=$val['total_revenue']?></span>
+			<span class="oper"><?=$val['daily_pl']?></span>
 		</li>
 		<?php } ?>
 		<!--

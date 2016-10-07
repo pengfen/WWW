@@ -116,14 +116,15 @@ CREATE TABLE `resource_share` (
 CREATE TABLE `resource_share_revenue` (
     `id` int unsigned NOT NULL AUTO_INCREMENT primary key,
 	`market_value` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '市值',
-	`sid` int unsigned NOT NULL DEFAULT 0 COMMENT '股票ID'，
+	`sid` int unsigned NOT NULL DEFAULT 0 COMMENT '股票ID',
 	`daily_pl` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '盈亏',
 	`current_rate` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '成交价',
     `volume` int unsigned NOT NULL DEFAULT 1000 COMMENT '成交量',
 	`type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '类型 0 买入 1 加仓 2 减仓 3 卖出',
 	`money` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '成交金额',
+	`closetime` int unsigned DEFAULT 0 COMMENT '成交时间',
     `addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
 	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id',
 	`cost_price` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '成本',
-	`current_price` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '现价',
+	`current_price` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '现价'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='股票收益表';
