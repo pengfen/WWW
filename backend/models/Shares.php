@@ -53,6 +53,7 @@ class Shares extends ActiveRecord {
 			$revenue->sid = $data['sid'];
 			$revenue->current_rate = $data['current_rate'];
 			$revenue->volume = $data['volume'];
+			$revenue->market_value = round($data['current_rate'] * $data['volume'], 2);
 			$revenue->type = $data['type'];
 			$revenue->money = $data['money'];
 			$revenue->addtime = time();
