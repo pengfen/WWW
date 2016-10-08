@@ -68,6 +68,17 @@
 	<form action="" method="post">
 	    <ul>
 			<li class="">
+			    <span class="label">股票</span>
+				<select name="sid">
+				    <option value="0">请选择股票</option>
+					<?php
+					foreach($info as $val) {
+					    echo "<option value='{$val["id"]}'>".$val['name']."</option>";
+					}
+					?>
+				</select>
+			</li>
+			<li class="">
 			    <span class="label">市值</span>
 				<input type="text" class="info_title" name="market_value" value="" placeholder=请输入市值 >
 			</li>

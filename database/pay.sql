@@ -109,8 +109,12 @@ CREATE TABLE `resource_share` (
 	`name` varchar(20) NOT NULL DEFAULT '0.0' COMMENT '股票名',
 	`share_code` char(6) NOT NULL DEFAULT '' COMMENT '股票代码',
     `addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
-	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id'
+	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id',
+	`isShow` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否显示'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='股票表';
+
+ALTER TABLE `resource_share` 
+ADD COLUMN `isShow` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否显示 0 显示 1不显示';
 
 -- 股票收益表
 CREATE TABLE `resource_share_revenue` (

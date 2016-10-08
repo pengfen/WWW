@@ -5,6 +5,7 @@ use Yii;
 use yii\web\Controller;
 use backend\models\Log;
 use backend\models\Shares;
+use backend\models\ShareRevenue;
 use backend\models\Account;
 
 /**
@@ -134,7 +135,7 @@ class SharesController extends Controller
 		Log::log("shares,action:revenue-detail,股票账号列表单击详情"); // 记录日志
 		$get = Yii::$app->request->get();
 		$id = $get['id'];
-		$info = Shares::find()->where(['id' => $id])->asArray()->one();
+		$info = ShareRevenue::find()->where(['id' => $id])->asArray()->one();
 		return $this->render('revenue-detail', [
 		    'info' => $info,
 		]);

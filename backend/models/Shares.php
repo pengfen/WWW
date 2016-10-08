@@ -26,7 +26,7 @@ class Shares extends ActiveRecord {
 	// 获取收益列表数据
 	public function getRevenue() {
 		$query = new Query();
-		$data = $query->select("id,market_value,daily_pl")->from(self::REVENUE)->all();
+		$data = $query->select("id,uid,market_value,daily_pl,addtime")->from(self::REVENUE)->all();
 		return $data;
 	}
 	
@@ -46,9 +46,37 @@ class Shares extends ActiveRecord {
 	
 	// 添加股票收益
 	public function addRevenue($data) {
-		$revenue = self::REVENUE;
-		$revenue->market_value = $data['market_value'];
-		return $revenue->save();
+		$revenue = new ShareRevenue();
+		
+		// 处理添加收益
+		if (isset($data['flag']) && $data['flag'] == 1) {
+			$revenue->sid = $data['sid'];
+			$revenue->current_rate = $data['current_rate'];
+			$revenue->volume = $data['volume'];
+			$revenue->type = $data['type'];
+			$revenue->money = $data['money'];
+			$revenue->addtime = time();
+			// 获取当前管理员 id
+			$manager = Yii::$app->session->get('manager');
+			$revenue->uid = $manager['id'];
+			return $revenue->save();
+		} else {
+			$sid = $data['sid'];
+			$info = $revenue::find()->select('current_rate,volume,type,money')->where(['sid' => $sid])->orderBy(['id' => SORT_DESC])->one();
+			$revenue->current_rate = $info['current_rate'];
+			$revenue->volume = $info['volume'];
+			$revenue->type = $info['type'];
+			$revenue->money = $info['money'];
+			$revenue->sid = $data['sid'];
+			$revenue->market_value = $data['market_value'];
+			$revenue->daily_pl = $data['daily_pl'];
+			$revenue->current_price = $data['current_price'];
+			$revenue->addtime = time();
+			// 获取当前管理员 id
+			$manager = Yii::$app->session->get('manager');
+			$revenue->uid = $manager['id'];
+			return $revenue->save();
+		}
 	}
 	
 	// 添加数据

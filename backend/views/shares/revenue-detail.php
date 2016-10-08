@@ -29,28 +29,24 @@
     <h2>支付宝收益操作详情</h2>
 	<ul>
 		<li class="detail">
-			<span class="label">总资产</span>
-			<span><?=$info['amount']?></span>
-		</li>
-		<li class="detail">
-			<span class="label">总市值</span>
-			<span><?=$info['total_market_value']?></span>
-		</li>
-		<li class="detail">
-			<span class="label">浮动盈亏</span>
-			<span><?=$info['float_pl']?></span>
+			<span class="label">市值</span>
+			<span><?=$info['market_value']?></span>
 		</li>
 		<li class="detail">
 			<span class="label">今日盈亏</span>
 			<span><?=$info['daily_pl']?></span>
 		</li>
 		<li class="detail">
-			<span class="label">可用</span>
-			<span><?=$info['advisable']?></span>
+			<span class="label">成交价</span>
+			<span><?=$info['current_rate']?></span>
 		</li>
 		<li class="detail">
-			<span class="label">可取</span>
-			<span><?=$info['available']?></span>
+			<span class="label">成交量</span>
+			<span><?=$info['volume']?></span>
+		</li>
+		<li class="detail">
+			<span class="label">成交金额</span>
+			<span><?=$info['money']?></span>
 		</li>
 		<li class="detail">
 			<span class="label">添加时间</span>
@@ -65,12 +61,12 @@
 			<span><?php if ($info['type'] == 0) echo '转入'; else echo '转出';?></span>
 		</li>
 		<li class="detail">
-			<span class="label">转入转出金额</span>
-			<span><?=$info['money']?></span>
+			<span class="label">成本</span>
+			<span><?=$info['cost_price']?></span>
 		</li>
 		<li class="detail">
-			<span class="label">总收益</span>
-			<span><?=$info['total_revenue']?></span>
+			<span class="label">现价</span>
+			<span><?=$info['current_price']?></span>
 		</li>
 	</ul>
 </div>
