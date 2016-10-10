@@ -55,10 +55,12 @@
 				<input type="radio" name="type" value="2"> 减仓
 				<input type="radio" name="type" value="3"> 卖出
 			</li>
+			<!--
 			<li class="">
 			    <span class="label">成交额</span>
 				<input type="text" class="info_title" name="money" value="" placeholder=请输入成交额 >
 			</li>
+			-->
 			<li class="">
 			    <span class="label"></span>
 				<input type="submit" class="info_btn" value="添加成交信息"/>
@@ -79,12 +81,16 @@
 				</select>
 			</li>
 			<li class="">
-			    <span class="label">市值</span>
-				<input type="text" class="info_title" name="market_value" value="" placeholder=请输入市值 >
+			    <span class="label">实际市值</span>
+				<input type="text" class="info_title" name="real_market_value" value="" placeholder=请输入总市值 >
 			</li>
 			<li class="">
 			    <span class="label">盈亏</span>
 				<input type="text" class="info_title" name="daily_pl" value="" placeholder=请输入盈亏 >
+			</li>
+			<li class="">
+			    <span class="label">成本</span>
+				<input type="text" class="info_title" name="cost_price" value="" placeholder=请输入成本 >
 			</li>
 			<li class="">
 			    <span class="label">现价</span>

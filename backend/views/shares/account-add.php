@@ -35,27 +35,27 @@
 			</li>
 			<li class="">
 			    <span class="label">总市值</span>
-				<input type="text" class="info_title" name="total_market_value" value="" placeholder=请输入总金额 >
+				<input type="text" class="info_title" name="total_market_value" value="" placeholder=请输入总市值 >
 			</li>
 			<li class="">
 			    <span class="label">浮动盈亏</span>
-				<input type="text" class="info_title" name="float_pl" value="" placeholder=请输入总金额 >
+				<input type="text" class="info_title" name="float_pl" value="" placeholder=请输入浮动盈亏 >
 			</li>
 			<li class="">
 			    <span class="label">当日盈亏</span>
-				<input type="text" class="info_title" name="daily_pl" value="" placeholder=请输入总金额 >
+				<input type="text" class="info_title" name="daily_pl" value="" placeholder=请输入当日盈亏 >
 			</li>
 			<li class="">
 			    <span class="label">可用</span>
-				<input type="text" class="info_title" name="advisable" value="" placeholder=请输入总金额 >
+				<input type="text" class="info_title" name="advisable" value="" placeholder=请输入可用 >
 			</li>
 			<li class="">
 			    <span class="label">可取</span>
-				<input type="text" class="info_title" name="available" value="" placeholder=请输入总金额 >
+				<input type="text" class="info_title" name="available" value="" placeholder=请输入可取 >
 			</li>
 			<li class="">
 			    <span class="label">总收益</span>
-				<input type="text" class="info_title" name="total_revenue" value="" placeholder=请输入今日收益 >
+				<input type="text" class="info_title" name="total_revenue" value="" placeholder=请输入总收益 >
 			</li>
 			
 			<!--

@@ -50,13 +50,30 @@ class Shares extends ActiveRecord {
 		
 		// 处理添加收益
 		if (isset($data['flag']) && $data['flag'] == 1) {
-			$revenue->sid = $data['sid'];
+			$sid = $data['sid'];
+			$revenue->sid = $sid;
 			$revenue->current_rate = $data['current_rate'];
 			$revenue->volume = $data['volume'];
 			$revenue->market_value = round($data['current_rate'] * $data['volume'], 2);
-			$revenue->type = $data['type'];
-			$revenue->money = $data['money'];
+			if ($data['type'] == 1) {
+				// 处理加仓
+				$info = $revenue::find()->select('market_value')->where(['sid' => $sid])->orderBy(['id' => SORT_DESC])->one();
+				$revenue->type = 1;
+				$revenue->market_value = $info['market_value'] + round($data['current_rate'] * $data['volume'], 2);
+			} elseif ($data['type'] == 2) {
+				// 处理减仓
+				$info = $revenue::find()->select('market_value')->where(['sid' => $sid])->orderBy(['id' => SORT_DESC])->one();
+				$revenue->type = 2;
+				$revenue->market_value = $info['market_value'] - round($data['current_rate'] * $data['volume'], 2);
+			} elseif ($data['type'] == 3) {
+				// 处理卖出
+				$info = $revenue::find()->select('market_value')->where(['sid' => $sid])->orderBy(['id' => SORT_DESC])->one();
+				$revenue->type = 3;
+				$revenue->market_value = 0;
+			}
+			$revenue->money = round($data['current_rate'] * $data['volume'], 2);
 			$revenue->addtime = time();
+			
 			// 获取当前管理员 id
 			$manager = Yii::$app->session->get('manager');
 			$revenue->uid = $manager['id'];
@@ -69,8 +86,9 @@ class Shares extends ActiveRecord {
 			$revenue->type = $info['type'];
 			$revenue->money = $info['money'];
 			$revenue->sid = $data['sid'];
-			$revenue->market_value = $data['market_value'];
+			$revenue->market_value = $data['real_market_value'];
 			$revenue->daily_pl = $data['daily_pl'];
+			$revenue->cost_price = $data['cost_price'];
 			$revenue->current_price = $data['current_price'];
 			$revenue->addtime = time();
 			// 获取当前管理员 id
@@ -82,7 +100,7 @@ class Shares extends ActiveRecord {
 	
 	// 添加数据
 	public function addAccount($data) {
-		$account = new self;
+		$account = new ShareAccount();
 		
 		// 处理添加收益
 		if (isset($data['flag']) && $data['flag'] == 1) {
@@ -98,6 +116,7 @@ class Shares extends ActiveRecord {
 			$info = $account::find()->select('amount,total_market_value,float_pl,daily_pl,advisable,available,total_revenue')->orderBy(['id' => SORT_DESC])->one();
 			$amount = 0;
 			$total = 0;
+			var_dump($data);
 			// 查询上一次总收益,总金额
 			if ($info) {
 				$amount = $info['amount'];

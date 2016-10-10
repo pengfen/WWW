@@ -55,7 +55,7 @@ class SharesController extends Controller
 		$data = Yii::$app->request->post();
 		if ($data) {
 			Log::log("shares,action:account-add,添加收益界面单击添加收益按钮"); // 记录日志
-			Account::add($data);
+			Shares::addAccount($data);
 		} else {
 			Log::log("shares,action:account-add,股票账号列表单击添加收益按钮"); // 记录日志
 		}

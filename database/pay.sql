@@ -119,6 +119,7 @@ ADD COLUMN `isShow` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT ' «∑Òœ‘ æ 0 œ
 -- π…∆± ’“Ê±Ì
 CREATE TABLE `resource_share_revenue` (
     `id` int unsigned NOT NULL AUTO_INCREMENT primary key,
+	`real_market_value` decimal(15, 2) NOT NULL DEFAULT '0.0' COMMENT ' µº  –÷µ',
 	`market_value` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT ' –÷µ',
 	`sid` int unsigned NOT NULL DEFAULT 0 COMMENT 'π…∆±ID',
 	`daily_pl` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '”Øø˜',
@@ -132,3 +133,6 @@ CREATE TABLE `resource_share_revenue` (
 	`cost_price` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '≥…±æ',
 	`current_price` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT 'œ÷º€'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='π…∆± ’“Ê±Ì';
+
+ALTER TABLE `resource_share_revenue` 
+ADD COLUMN `real_market_value` decimal(15, 2) NOT NULL DEFAULT '0.0' COMMENT ' µº  –÷µ';
