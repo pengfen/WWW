@@ -116,7 +116,6 @@ class Shares extends ActiveRecord {
 			$info = $account::find()->select('amount,total_market_value,float_pl,daily_pl,advisable,available,total_revenue')->orderBy(['id' => SORT_DESC])->one();
 			$amount = 0;
 			$total = 0;
-			var_dump($data);
 			// 查询上一次总收益,总金额
 			if ($info) {
 				$amount = $info['amount'];
