@@ -31,7 +31,7 @@
 	    <ul>
 		    <li class="">
 			    <span class="label">指基名</span>
-				<input type="text" class="info_title" name="name" value="" placeholder=请输入指数名 >
+				<input type="text" class="info_title" name="name" value="天弘创业板指数A" placeholder=请输入指数名 >
 			</li>
 			<li class="">
 			    <span class="label">昨日收益</span>
@@ -41,9 +41,15 @@
 			    <span class="label">总金额</span>
 				<input type="text" class="info_title" name="amount" value="" placeholder=请输入总金额 >
 			</li>
+			<!--
 			<li class="">
 			    <span class="label">累计收益</span>
 				<input type="text" class="info_title" name="total_revenue" value="" placeholder=请输入累计收益 >
+			</li>
+			-->
+			<li class="">
+			    <span class="label">最新净值</span>
+				<input type="text" class="info_title" name="now_worth" value="" placeholder=请输入最新净值 >
 			</li>
 			
 			<!--
@@ -55,6 +61,27 @@
 			<li class="">
 			    <span class="label"></span>
 				<input type="submit" class="info_btn" value="添加指数基金收益"/>
+			</li>
+		</ul>
+	</form>
+	<form action="" method="post">
+	    <ul>
+		    <li class="">
+			    <span class="label">类型(转入转出)</span>
+				<input type="radio" name="type" value="0" checked> 转入
+				<input type="radio" name="type" value="1"> 转出
+			</li>
+			<li class="">
+			    <span class="label">转入转出金额</span>
+				<input type="text" class="info_title" name="money" value="" placeholder=请输入转入转出说明 >
+			</li>
+			<li class="">
+			    <span class="label">转入转出说明</span>
+				<input type="text" class="info_title" name="note" value="" placeholder=请输入转入转出说明 >
+			</li>
+			<li class="">
+			    <span class="label"></span>
+				<input type="submit" class="info_btn" value="添加买入卖出金额"/>
 			</li>
 		</ul>
 	</form>

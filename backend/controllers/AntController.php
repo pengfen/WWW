@@ -9,7 +9,7 @@ use backend\models\Gold;
 use backend\models\Fund;
 
 /**
- * 蚂蚁聚宝理财 (支付宝理财列表)
+ * 蚂蚁聚宝理财 (支付宝理财列表, 黄金理财列表, 指基理财列表)
  * 作者: caopeng
  * 时间: 2016-09-24
  */
