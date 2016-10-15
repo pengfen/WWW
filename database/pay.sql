@@ -7,7 +7,7 @@ CREATE TABLE `resource_pay` (
 	`revenue` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '收益',
 	`addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
 	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id',
-	`type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '类型 0 转入 1 转出 3非转入转出',
+	`type` tinyint(1) unsigned NOT NULL DEFAULT 3 COMMENT '类型 0 转入 1 转出 3非转入转出',
 	`money` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '转入转出金额',
 	`note` varchar(255) NOT NULL DEFAULT '' COMMENT '说明',
 	`total_revenue` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '总收益'
@@ -21,7 +21,7 @@ CREATE TABLE `resource_gold` (
 	`addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
 	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id',
 	`hold_gold` decimal(15,4) NOT NULL DEFAULT '0.0' COMMENT '持有黄金',
-	`type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '类型 0 买入 1 卖出',
+	`type` tinyint(1) unsigned NOT NULL DEFAULT 3 COMMENT '类型 0 买入 1 卖出 3非转入转出',
 	`money` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '买入卖出金额',
 	`cost_price` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '成本',
 	`current_price` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '现价',
@@ -40,7 +40,7 @@ CREATE TABLE `resource_index_fund` (
 	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id',
 	`now_worth` decimal(15,4) NOT NULL DEFAULT '0.0' COMMENT '最新净值',
 	`hold_lot` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '持有份额',
-	`type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '类型 0 买入 1 卖出',
+	`type` tinyint(1) unsigned NOT NULL DEFAULT 3 COMMENT '类型 0 买入 1 卖出 3非转入转出',
 	`money` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '买入卖出金额',
 	`note` varchar(255) NOT NULL DEFAULT '' COMMENT '说明',
 	`account_revenue` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '账户总收益'
@@ -50,7 +50,7 @@ ADD COLUMN `now_worth` decimal(15,4) NOT NULL DEFAULT '0.0' COMMENT '最新净值';
 ALTER TABLE `resource_index_fund` 
 ADD COLUMN `hold_lot` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '持有份额';
 ALTER TABLE `resource_index_fund` 
-ADD COLUMN `type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '类型 0 买入 1 卖出';
+ADD COLUMN `type` tinyint(1) unsigned NOT NULL DEFAULT 3 COMMENT '类型 0 买入 1 卖出 3非转入转出';
 ALTER TABLE `resource_index_fund` 
 ADD COLUMN `money` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '买入卖出金额';
 ALTER TABLE `resource_index_fund` 
@@ -89,7 +89,7 @@ CREATE TABLE `resource_p2p_revenue` (
 	`addtime` int unsigned DEFAULT 0 COMMENT '添加时间',
 	`uid` int unsigned DEFAULT 0 COMMENT '所属用户id',
 	`amount` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '总金额',
-	`type` tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '类型 0 加仓 1 减仓',
+	`type` tinyint(1) unsigned NOT NULL DEFAULT 3 COMMENT '类型 0 加仓 1 减仓 3非转入转出',
 	`money` decimal(15,2) NOT NULL DEFAULT '0.0' COMMENT '加减仓金额',
 	`note` varchar(255) NOT NULL DEFAULT '' COMMENT '说明'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='P2P收益表';

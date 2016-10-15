@@ -52,5 +52,29 @@
 			<span class="label">总收益</span>
 			<span><?=$info['total_revenue']?></span>
 		</li>
+		<li class="detail">
+			<span class="label">最新净值</span>
+			<span><?=$info['now_worth']?></span>
+		</li>
+		<li class="detail">
+			<span class="label">持有份额</span>
+			<span><?=$info['hold_lot']?></span>
+		</li>
+		<li class="detail">
+			<span class="label">类型</span>
+			<span><?=$info['type']?></span>
+		</li>
+		<li class="detail">
+			<span class="label">买入卖出份额</span>
+			<span><?=$info['money']?></span>
+		</li>
+		<li class="detail">
+			<span class="label">说明</span>
+			<span><?=$info['note']?></span>
+		</li>
+		<li class="detail">
+			<span class="label">账户总收益</span>
+			<span><?=$info['account_revenue']?></span>
+		</li>
 	</ul>
 </div>
