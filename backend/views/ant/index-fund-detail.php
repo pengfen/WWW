@@ -60,6 +60,7 @@
 			<span class="label">持有份额</span>
 			<span><?=$info['hold_lot']?></span>
 		</li>
+		<?php if ($info['type'] != 3) { ?>
 		<li class="detail">
 			<span class="label">类型</span>
 			<span><?=$info['type']?></span>
@@ -72,6 +73,7 @@
 			<span class="label">说明</span>
 			<span><?=$info['note']?></span>
 		</li>
+		<?php } ?>
 		<li class="detail">
 			<span class="label">账户总收益</span>
 			<span><?=$info['account_revenue']?></span>
