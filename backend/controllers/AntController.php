@@ -12,6 +12,9 @@ use backend\models\Fund;
  * 蚂蚁聚宝理财 (支付宝理财列表, 黄金理财列表, 指基理财列表)
  * 作者: caopeng
  * 时间: 2016-09-24
+ * 
+ * 修改记录
+ * 2016/10/23 修改黄金理财(针对最新一条记录进行校正)
  */
 class AntController extends Controller
 {
@@ -92,6 +95,27 @@ class AntController extends Controller
 			Log::log("ant,action:gold-add,黄金收益列表单击添加收益按钮"); // 记录日志
 		}
 		return $this->render('gold-add');
+	}
+	
+	// 修改黄金收益
+	public function actionGoldEdit() {
+		$get = Yii::$app->request->get();
+		if ($get) {
+			$id = $get['id'];
+		    $info = Gold::find()->select("id,amount,total_revenue,current_price")->where(['id' => $id])->one();
+		}
+		
+		$data = Yii::$app->request->post();
+		if ($data) {
+			Log::log("ant,action:gold-edit,修改黄金收益列表单击修改收益按钮"); // 记录日志
+			Gold::edit($data);
+			return Yii::$app->getResponse()->redirect('/index.php?r=ant/gold');
+		} else {
+			Log::log("ant,action:gold-add,黄金收益列表单击修改收益按钮"); // 记录日志
+			return $this->render('gold-edit', [
+				'info' => $info,
+			]);
+		}
 	}
 	
     // 黄金收益详情

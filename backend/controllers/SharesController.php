@@ -45,7 +45,7 @@ class SharesController extends Controller
 	public function actionIndex() {
 		$text=file_get_contents("http://quote.eastmoney.com/center/BKList.html#trade_0_0?sortRule=0"); //将url地址上页面内容保存进$text
 
-		preg_match('/<div([^<>]*)>([^<>]*)<\/div>/', $text, $title); 
+		preg_match_all('/<div class=\"section-main\">([^<>]*)<\/div>/', $text, $title); 
         //因为正文中的商品名称标签没有特殊class或id正则不好抓取，就抓<title>标签中的内容了，一般来说title中内容就是商品名称了（实际有些出入），$title[0]整个title标签 $title[1]标签中内容；
 		//$title=iconv('GBK','UTF-8',$title);
 		var_dump($title);

@@ -71,4 +71,15 @@ class Gold extends ActiveRecord {
 		
 		return $gold->save();
 	}
+	
+	// 修改
+	public static function edit($data) {
+		$id = $data['id'];
+		$gold = static::findOne($id);
+		$gold->amount = $data['amount'];
+		$gold->current_price = $data['current_price'];
+		$gold->total_revenue = $data['total_revenue'];
+		$gold->hold_gold = round($gold->amount / $data['current_price'], 4);
+		return $gold->save();
+	}
 }

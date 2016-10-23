@@ -45,7 +45,11 @@
 		    <span class="author"><?=$val['uid']?></span>
 			<span class="title"><a href="/index.php?r=ant/gold-detail&id=<?=$val['id']?>"><?=$val['amount']?></a></span>
 			<span class="date"><?=date('Y-m-d H:i:s', $val['addtime']);?></span>
-			<span class="oper"><?=$val['total_revenue']?></span>
+			<span class="oper"><?=$val['total_revenue']?>
+			<?php if ($key == 0) { ?>
+				<a href="/index.php?r=ant/gold-edit&id=<?=$val['id']?>">修改</a>
+			<?php } ?>
+			</span>
 		</li>
 		<?php } ?>
 		<!--
