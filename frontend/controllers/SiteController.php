@@ -210,4 +210,19 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+    /**
+     * 搜索关联词 （使用迅搜）2016-12-12
+    */
+    public function actionExpand() {
+        $complete = array(
+            array('value' => 'a'),
+            array('value' => 'ab'),
+            );
+        $data = array(
+                'suggestions' => $complete
+            );
+        echo json_encode($data);
+        exit;
+    }
 }

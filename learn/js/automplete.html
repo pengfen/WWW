@@ -1,0 +1,35 @@
+1 编写 html 代码
+<input type="text" name="search" id='search' value="" autocomplete="off" placeholder="请输入搜索词">
+
+2 加载相关js资源文件
+<script type="text/javascript" src="<?=Url::to('@web/js/jquery-1.8.2.min.js')?>"></script>
+<script type="text/javascript" src="<?=Url::to('@web/js/jquery.autocomplete.min.js')?>"></script>
+
+3 编写补全测试代码 (不要将方法autocomplete方法编写到$(function(){})中)
+$('#search').autocomplete({
+    serviceUrl: 'index.php?r=site/expand',
+    onSelect: function (suggestion) {
+    	console.log('测试 ' + suggestion.value);
+    }
+});
+
+4 编写php代码 ()
+/**
+ * 搜索关联词 （使用迅搜）2016-12-12
+*/
+public function actionExpand() {
+    $complete = array(
+        array('value' => 'a'),
+        array('value' => 'ab'),
+        );
+
+    // 注意必须使用suggestions作为参数来传递
+    $data = array(
+            'suggestions' => $complete
+        );
+    echo json_encode($data);
+    exit;
+}
+
+5 页面测试
+输入a --- 程序会调用 autocomplete 方法 --- 调用路由 --- 加载数据
