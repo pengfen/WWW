@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\Technarticle;
 
 /**
  * Site controller
@@ -72,6 +73,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        // 查询数据
+        $info = Technarticle::find()->select('')->where(['like', 'title', '单'])->asArray()->all();
         return $this->render('index');
     }
 
@@ -215,8 +218,12 @@ class SiteController extends Controller
      * 搜索关联词 （使用迅搜）2016-12-12
     */
     public function actionExpand() {
+        // 获取输入框查询的值
+        $data = Yii::$app->request->get();
+        $query = $data['query'];
+
         $complete = array(
-            array('value' => 'a'),
+            array('value' => $query),
             array('value' => 'ab'),
             );
         $data = array(
