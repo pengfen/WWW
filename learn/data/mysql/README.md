@@ -6,3 +6,7 @@
  mysql-user.html    mysql用户管理
  mysql-backup.html  mysql备份
  mysql-grant.html   mysql权限操作
+
+
+ 目录
+ opt mysql优化
