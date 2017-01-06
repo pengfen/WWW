@@ -31,3 +31,18 @@ bin/logstash -e 'input { stdin { } } output { stdout {} }'
 the stdin plugin is now waiting for input: #控制台提示输入
 welcome to logstash world
 2016-12-05T08:04:32.142Z 0.0.0.0 hello welcome to logstash world
+
+bin/logstash -e 'input{stdin{}}output{stdout{codec=>rubydebug}}'
+welcome to logstash world
+{
+    "@timestamp" => 2016-12-05T11:51:12.840Z,
+      "@version" => "1",
+          "host" => "0.0.0.0",
+       "message" => "welcome to logstash world",
+          "tags" => []
+}
+
+@timestamp 标记事件的发生时间
+message 客户端输入信息
+host 标记事件发生在哪里
+tags 标记事件的某方面属性
