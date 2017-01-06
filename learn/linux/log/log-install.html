@@ -27,6 +27,7 @@ tar -zxvf logstash-5.1.1.tar.gz
 cd logstash-5.1.1
 
 第一个事件
+------------------------------------------
 bin/logstash -e 'input { stdin { } } output { stdout {} }'
 the stdin plugin is now waiting for input: #控制台提示输入
 welcome to logstash world
@@ -46,3 +47,19 @@ welcome to logstash world
 message 客户端输入信息
 host 标记事件发生在哪里
 tags 标记事件的某方面属性
+
+使用配置文件
+------------------------------------------
+vi logstash.conf #注意换行
+
+input {stdin {}}
+output {stdout {codec => rubydebug {}}}
+bin/logstash -f logstash.conf
+welcome to logstash world
+{
+    "@timestamp" => 2016-12-05T11:51:12.840Z,
+      "@version" => "1",
+          "host" => "0.0.0.0",
+       "message" => "welcome to logstash world",
+          "tags" => []
+}
