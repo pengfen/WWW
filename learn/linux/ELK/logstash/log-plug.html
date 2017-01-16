@@ -17,3 +17,19 @@ nohup永久执行 &后台运行
 nohup运行命令可以使命令永久的执行下去 和用户终端没有关系 如断开SSH连接都不会影响它的运行机制
 &后台运行 当用户挂起的时候 命令自动退出
 nohup COMMAND &  使命令永久的在后台执行
+
+使用daemontools方式
+yum -y install supervisord --enablerepo=epel
+vi /etc/supervisord.conf
+[program:log_1]
+environment=LS_HEAP_SIZE=5000m
+directory=/opt/logstash
+command=/opt/logstash/bin/logstash -f /etc/logstash/index.conf -w 10 -i /var/log/logstash/log1.log
+[program:log_2]
+environment=LS_HEAP_SIZE=5000m
+directory=/opt/logstash
+command=/opt/logstash/bin/logstash -f /etc/logstash/index.conf -w 10 -i /var/log/logstash/log2.log
+
+service supervisord start
+启动某一个进程
+supervisord stop log_2
