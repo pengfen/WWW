@@ -1,0 +1,16 @@
+创建索引
+
+索引库名称必须要全部小写 不能以下划线开头 也不能包含逗号
+
+cu apeng
+bin/elasticsearch
+
+打开另一个客户端
+curl -XPOST http://192.168.233.132:9200/log/testlog -d '{"user":"caopeng"}'
+{"_index":"log","_type":"testlog","_id":"","_version":1,"result":"created","_shards":...}
+_index 索引名
+
+页面查询
+http://192.168.233.132:9200/logstash-2016.01.16/_search?q=caopeng
+查询的串
+{"took":178,"timed_out":false,"_shards":{"total":5,"successful":5,"failed":0},"hits":{"total":1,"max_score":0.2876821,"hits":[{"_index":"logstash-2016.01.16","_type":"testlog","_id":"AVjSYrQ8ylfM4pFRIx9x","_score":0.2876821,"_source":{"user":"caopeng"}}]}}
