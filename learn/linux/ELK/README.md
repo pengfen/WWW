@@ -12,3 +12,7 @@ elc-config.html   elasticsearch 配置
 
 kibana
 kib-install.html  kibana 安装
+
+elk-intro.html    介绍
+
+php php操作elasticsearch

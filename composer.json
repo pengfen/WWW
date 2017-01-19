@@ -18,7 +18,8 @@
         "yiisoft/yii2": ">=2.0.6",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "hightman/xunsearch": "*@beta"
+        "hightman/xunsearch": "*@beta",
+        "yiisoft/yii2-elasticsearch": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
