@@ -45,7 +45,7 @@ public function actionAdd()
 	$auth = new EAuth();
 	foreach ($info as $key => $value) {
 		$auth->primaryKey = $value['id'];
-		$auth->name = $value['name'];
+		$auth->name = $value['name'];253
 		$auth->pid = $value['pid'];
 		$auth->controller = $value['controller'];
 		$auth->action = $value['action'];
