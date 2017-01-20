@@ -1,0 +1,4 @@
+elasticsearch logstash随着kibana的命名升级直接从2.4跳跃到了5.0，5.x版本的elk在版本对应上要求相对较高，不再支持5.x和2.x的混搭，同时elastic做了一个package，对原本的watch，alert做了一个封装，形成了x-pack
+
+elasticsearch ---> bin/elasticsearch-plugin install x-pack (监控以前版本使用bin/plugin -i elasticsearch/marvel/latest)
+kibana ---> bin/kibana-plugin install x-pack
