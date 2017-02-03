@@ -10,6 +10,5 @@ kibana
 kib-install.html  kibana 安装
 
 elk-intro.html    介绍
-xpack.html
 
 php php操作elasticsearch

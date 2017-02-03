@@ -33,3 +33,39 @@ public function actionExpand() {
 
 5 页面测试
 输入a --- 程序会调用 autocomplete 方法 --- 调用路由 --- 加载数据
+
+
+项目中使用
+<input type="text" id="targetUserId" value="" autocomplete="off" placeholder="请输入投顾">
+
+js异步请求 (页面显示样式可在css文件中使用类autocomplete-suggestions来控制)
+$('#targetUserId').autocomplete({
+    serviceUrl: 'index.php?r=customer/get-target-user&prefix=<?=$prefix?>',
+    onSelect: function (suggestion) {
+        var form = $('#searchForm');
+        var text = suggestion.data; // 读取的是控制器中$complete['data']数据
+        $('input[name="targetUserId"]').val(text);
+        $('input[name="queryCond"]').val($('.query_sel_cond').html());
+        form.append($('.query_sel_cond').html());
+        form.submit();
+    }
+});
+
+控制路由
+public function actionGetTargetUser() { // 获取投顾补全数据
+    $get = Yii::$app->request->get(); // 获取get传参prefix=...&query=...
+    $prefix = $get['prefix'];
+    $user = UserBase::getAuthUser($prefix); // 获取投顾相关数据
+    $complete = [];
+    $q = $get['query']; // 获取页面输入框输入的参数
+    foreach ($user as $key => $value) {
+        if (stripos($value['name'], $q) !== false) {
+            $complete[$key]['value'] = $value['name'];
+            $complete[$key]['data'] = $value['uid'];
+        }
+        
+    }
+    $data = array('suggestions' => $complete);
+    echo json_encode($data);
+    exit;
+}
