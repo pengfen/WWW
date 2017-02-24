@@ -14,3 +14,5 @@ elk-intro.html    介绍
 php php操作elasticsearch
 
 instance.html 实例
+
+dsl.html     查询
