@@ -1,5 +1,6 @@
 http://php.net/manual/zh/   php 手册
 
+basic         php 基础
 curl          php-curl
 file          php文件相关
 frame         php相关框架
