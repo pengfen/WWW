@@ -1,6 +1,11 @@
 <?php
 namespace frontend\controllers;
 use yii\web\Controller;
+
+/**
+ * 使用文件缓存时注意事项
+ * 多节点环境下使用 flush() 时只删除当前节点下的数据  使用脚本(exec('/opt/php-5.6.8/bin/php /file-path param >> /log-file'))删除或者使用其它缓存技术 
+*/
 // 缓存相关
 class CacheController extends Controller{
 	// 数据缓存之添加删除等
