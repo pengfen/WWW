@@ -7,6 +7,9 @@ logstash
 elasticsearch
 
 kibana
+
+echarts 使用js显示图表
+
 kib-install.html  kibana 安装
 
 elk-intro.html    介绍
