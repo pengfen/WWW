@@ -1,3 +1,21 @@
+// 定义对象
+var options = {11:"市场一部",12:"市场二部",13:"市场三部",14:"市场四部",15:'市场五部',16:'市场六部',17:'市场七部',18:'市场八部'};
+
+// 调用函数
+$('slector').func_name(options, ...);
+
+(function(){
+  $.fn.extend({
+      func_name: function(options, ...) {
+          $.each(options, function(i, n){
+              // i 对象属性名
+              // n 对象属性值
+          });
+      }
+  });
+})(jQuery);
+
+----------------------------------------------
 var data = {}; // 定义一个对象 (用于存放数据)
 data.id = id;
 data.name = name;
@@ -21,36 +39,5 @@ $('input[name="method_name"]').each(function(i) {
 });
 data.method = method_arr; 
 
-
-php 中处理直接处理数组
-array(2) {
-  ["data"]=>
-  array(7) {
-    ["id"]=>
-    string(1) "1"
-    ["name"]=>
-    string(12) "系统首页"
-    ["parent"]=>
-    string(1) "0"
-    ["route"]=>
-    string(10) "home/index"
-    ["display"]=>
-    string(1) "1"
-    ["order"]=>
-    string(1) "1"
-    ["method"]=>
-    array(1) {
-      [0]=>
-      array(3) {
-        ["id"]=>
-        string(4) "1057"
-        ["name"]=>
-        string(12) "全部数据"
-        ["route"]=>
-        string(16) "q010001_all_data"
-      }
-    }
-  }
-  ["state"]=>
-  string(1) "6"
-}
+data 作为参数传至后台 控制器中直接处理数组
+array('data' => array('id' => 1, 'name' => '系统首页', 'parent' => 0, 'route' => 'home/index', 'display' => 1, 'order' => 1, 'state' => 0, 'method' => array('id' => 1057, 'name' => '全部数据', 'route' => 'q020001_all')))
