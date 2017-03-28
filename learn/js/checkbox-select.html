@@ -15,11 +15,17 @@ $('#check').attr('checked') = 'checked';
 $('#check').prop('checked') = false;
 $('#check').prop('checked') = true;
 
-js  .checked = false; // 取消选择
-    .checked = true;  // 添加选择
+自定义属性
+---------------------------------------
+设置自定义属性 setAttribute
+获取自定义属性 getAttribute
+移出自定义属性 removeAttribute
 
-    .disabled = true; // 禁用按钮
-    .disabled = false; // 启用按钮
+js  selected.checked = false; // 取消选择
+    selected.checked = true;  // 添加选择
+
+    selected.disabled = true; // 禁用按钮
+    selected.disabled = false; // 启用按钮
 
 jquery
     $(this).removeAttr("checked"); // 取消选择
@@ -37,7 +43,7 @@ jquery
 使用js操作
 $(".pmi_pl span").bind("click",function(){
     var obj = $(this).prev("input[type=checkbox]");
-    if(obj.attr("checked")==true){ 
+    if(obj.attr("checked") == true){ 
         obj.removeAttr("checked"); 
     }
     else { 
