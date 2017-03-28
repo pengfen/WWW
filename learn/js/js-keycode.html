@@ -7,7 +7,7 @@
 $('.cid').click(function() {
 	var cid = $(this).prev('input').val();
 	if (cid) {
-	    if (cid <= 0 || isNaN(cid)) {
+	    if (cid <= 0 || isNaN(cid)) { // 检查其参数是否是非数字值
 	        layer.msg('客户ID必须是数字');
 	        return false;
 	    }
@@ -26,7 +26,7 @@ $('.cid').click(function() {
 </form>
 根据客户姓名回车查询
 $('input[name="name"]').bind('keyup', function(event) {
-	if (event.keyCode == '13') {
+	if (event.keyCode == '13') { // 回车键的code值13 方向键 左 37 上 38 右 39 下 40
 	    var form = $('#searchFrom');
 	    var name = $(this).val();
 	    if (name) form.submit();
